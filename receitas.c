@@ -33,9 +33,11 @@ void menuSobre(void) {
     printf("///                                                                         ///\n");
     printf("///       = = = = = Caderno Virtual de Receitas Culinárias = = = = =        ///\n");
     printf("///                                                                         ///\n");
-    printf("///  O projeto propõe um sistema capaz de gerenciar um conjunto de          ///\n");
-    printf("///  receitas culinárias, permitindo a busca por pratos que contenham       ///\n");
-    printf("///  determinados ingredientes e a respectiva otimização dos estoques.      ///\n");
+    printf("///  O projeto de Caderno Virtual de Receitas tem como objetivo facilitar   ///\n");
+    printf("///     facilitar a vida de pessoas comuns, permitindo uma organização      ///\n");
+    printf("///                  com maior eficácia e simplicidade.                     ///\n");
+    printf("///     Permitirá que o usuário crie novas receitas, edite as existentes,   ///\n");
+    printf("///           delete, procure por receitas com x ingredientes, e etc.       ///\n");
     printf("///                                                                         ///\n");
     printf("///////////////////////////////////////////////////////////////////////////////\n");
     printf("\n");
