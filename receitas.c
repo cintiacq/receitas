@@ -1,10 +1,12 @@
 ///////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////
 ///             Universidade Federal do Rio Grande do Norte                 ///
 ///                 Centro de Ensino Superior do Seridó                     ///
 ///               Departamento de Computação e Tecnologia                   ///
 ///                  Disciplina DCT1106 -- Programação                      ///
 ///            Projeto Caderno Virtual de Receitas Culinárias               ///
 ///            Developed by  @Sana-El e @cintiacq - Jan, 2021               ///
+///////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////
 
 #include <stdio.h>
@@ -21,6 +23,7 @@ int main(void) {
 void menuSobre(void) {
     printf("\n");
     printf("///////////////////////////////////////////////////////////////////////////////\n");
+    printf("///////////////////////////////////////////////////////////////////////////////\n");
     printf("///                                                                         ///\n");
     printf("///             Universidade Federal do Rio Grande do Norte                 ///\n");
     printf("///                 Centro de Ensino Superior do Seridó                     ///\n");
@@ -29,6 +32,7 @@ void menuSobre(void) {
     printf("///            Projeto Caderno Virtual de Receitas Culinárias               ///\n");
     printf("///            Developed by  @Sana-El e @cintiacq - Jan, 2021               ///\n");
     printf("///                                                                         ///\n");
+    printf("///////////////////////////////////////////////////////////////////////////////\n");
     printf("///////////////////////////////////////////////////////////////////////////////\n");
     printf("///                                                                         ///\n");
     printf("///       = = = = = Caderno Virtual de Receitas Culinárias = = = = =        ///\n");
@@ -39,6 +43,7 @@ void menuSobre(void) {
     printf("///     Permitirá que o usuário crie novas receitas, edite as existentes,   ///\n");
     printf("///           delete, procure por receitas com x ingredientes, e etc.       ///\n");
     printf("///                                                                         ///\n");
+    printf("///////////////////////////////////////////////////////////////////////////////\n");
     printf("///////////////////////////////////////////////////////////////////////////////\n");
     printf("\n");
 }
