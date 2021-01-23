@@ -1,1 +1,0 @@
-qukaquer coia
