@@ -6,5 +6,5 @@
   Permitirá que o usuário crie novas receitas, edite as existentes, delete, procure por receitas com x ingredientes, e etc
 
 # Desenvolvedores
-  Cintia Campos de Queiroz\r
+  Cintia Campos de Queiroz e 
   Samuel Gutemberg Pereira
