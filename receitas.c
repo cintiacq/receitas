@@ -73,7 +73,7 @@ void menuPrincipal(void) {
 	printf("///           2. Edite uma receita                                        ///\n");
 	printf("///           3. Deletar receita                                          ///\n");
 	printf("///           4. procurar receita por ingrediente                         ///\n");
-    printf("///           0. Encerra o programa                                       ///\n");
+        printf("///           0. Encerra o programa                                       ///\n");
 	printf("///                                                                       ///\n");
 	printf("///           Escolha a opção desejada:                                   ///\n");
 	printf("///                                                                       ///\n");
