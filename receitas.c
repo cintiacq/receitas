@@ -204,7 +204,8 @@ char delReceita(void) {
   return op;
 }
 
-void pesquisarReceita(void) {
+char pesquisarReceita(void) {
+  char ingredientes[1000];
     system("clear");
 	printf("\n");
 	printf("/////////////////////////////////////////////////////////////////////////////\n");
@@ -219,12 +220,12 @@ void pesquisarReceita(void) {
 	printf("/////////////////////////////////////////////////////////////////////////////\n");
 	printf("///                                                                       ///\n");
 	printf("///           = = = = = = = = = = = = = = = = = = = = = = = =             ///\n");
-	printf("///           = = = = = = =  Pesquisar Receita  = = = = = = =             ///\n");
+	printf("///           = = = Pesquisar Receita por ingreditene = = = =              ///\n");
 	printf("///           = = = = = = = = = = = = = = = = = = = = = = = =             ///\n");
 	printf("///                                                                       ///\n");
-	printf("///           Nome:                                                       ///\n");
-	printf("///           ingredientes:                                               ///\n");
-	printf("///           Passo a passo:                                              ///\n");
+	printf("///           ingredientes: ");
+        scanf("%[A-ZÁÉÍÓÚÂÊÔÇÀÃÕ a-záéíóúâêôçàãõ],[0-9/]", ingredientes);
+	getchar();
 	printf("///                                                                       ///\n");
 	printf("///                                                                       ///\n");
 	printf("/////////////////////////////////////////////////////////////////////////////\n");
