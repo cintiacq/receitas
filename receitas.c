@@ -19,7 +19,7 @@ char editReceita(void);
 char delReceita(void);  
 char pesquisarReceita(void);
 
-int main(void) { // sam
+int main(void) { 
   	char opcao; 
 
     menuSobre(); 
@@ -95,7 +95,7 @@ char menuPrincipal(void) {
 	getchar();
         return op;
 }
-char novaReceita(void) { // sam
+char novaReceita(void) { 
   char op;
     system("clear");
 	printf("\n");
@@ -131,7 +131,8 @@ char novaReceita(void) { // sam
   return op;
 }
 
-void editReceita(void) {
+char editReceita(void) { 
+  char op;
     system("clear");
 	printf("\n");
 	printf("/////////////////////////////////////////////////////////////////////////////\n");
@@ -154,16 +155,20 @@ void editReceita(void) {
 	printf("///           3. Atualizar passo a passo                                  ///\n");
 	printf("///           0. Voltar ao menu anterior                                  ///\n");
 	printf("///                                                                       ///\n");
-	printf("///           Escolha a opção desejada:                                   ///\n");
+	printf("///           Escolha a opção desejada:");
+        scanf("%c", &op);
+        getchar();
 	printf("///                                                                       ///\n");
 	printf("///                                                                       ///\n");
 	printf("/////////////////////////////////////////////////////////////////////////////\n");
 	printf("\n");
-    printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
+        printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
 	getchar();
+  return op;
 }
 
-void delReceita(void) {
+char delReceita(void) { 
+  char op;
     system("clear");
 	printf("\n");
 	printf("/////////////////////////////////////////////////////////////////////////////\n");
@@ -188,12 +193,15 @@ void delReceita(void) {
 	printf("///           0. Voltar ao menu anterior                                  ///\n");
 	printf("///                                                                       ///\n");
 	printf("///           Escolha a opção desejada:                                   ///\n");
-	printf("///                                                                       ///\n");
+	scanf("%c", &op);
+  getchar();
+  printf("///                                                                       ///\n");
 	printf("///                                                                       ///\n");
 	printf("/////////////////////////////////////////////////////////////////////////////\n");
 	printf("\n");
     printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
 	getchar();
+  return op;
 }
 
 void pesquisarReceita(void) {
