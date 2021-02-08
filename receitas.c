@@ -60,7 +60,8 @@ void menuSobre(void) {
     printf("///////////////////////////////////////////////////////////////////////////////\n");
     printf("\n");
 }
-void menuPrincipal(void) {
+char menuPrincipal(void) {
+  char op; 
     system("clear");
 	printf("\n");
 	printf("/////////////////////////////////////////////////////////////////////////////\n");
@@ -84,13 +85,15 @@ void menuPrincipal(void) {
 	printf("///           4. procurar receita por ingrediente                         ///\n");
         printf("///           0. Encerra o programa                                       ///\n");
 	printf("///                                                                       ///\n");
-	printf("///           Escolha a opção desejada:                                   ///\n");
-	printf("///                                                                       ///\n");
+	printf("///           Escolha a opção desejada:");
+        scanf("%c", &op);
+	getchar();
 	printf("///                                                                       ///\n");
 	printf("/////////////////////////////////////////////////////////////////////////////\n");
 	printf("\n");
-    printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
+        printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
 	getchar();
+        return op;
 }
 void novaReceita(void) {
     system("clear");
