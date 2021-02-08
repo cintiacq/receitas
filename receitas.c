@@ -19,13 +19,15 @@ char editReceita(void);
 char delReceita(void);  
 char pesquisarReceita(void);
 
-int main(void) {
-    menuSobre();
-    menuPrincipal();
-    novaReceita();
-    editReceita();
-    delReceita();
-    pesquisarReceita();
+int main(void) { // sam
+  	char opcao; 
+
+    menuSobre(); 
+    novaReceita(); 
+    opcao = menuPrincipal();
+    opcao = editReceita(); 
+    opcao = delReceita(); 
+    opcao = pesquisarReceita(); 
     return 0;
 
 }
