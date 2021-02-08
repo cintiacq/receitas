@@ -163,7 +163,8 @@ void editReceita(void) {
 	getchar();
 }
 
-void delReceita(void) {
+char delReceita(void) { // sam
+  char op;
     system("clear");
 	printf("\n");
 	printf("/////////////////////////////////////////////////////////////////////////////\n");
@@ -188,12 +189,15 @@ void delReceita(void) {
 	printf("///           0. Voltar ao menu anterior                                  ///\n");
 	printf("///                                                                       ///\n");
 	printf("///           Escolha a opção desejada:                                   ///\n");
-	printf("///                                                                       ///\n");
+	scanf("%c", &op);
+  getchar();
+  printf("///                                                                       ///\n");
 	printf("///                                                                       ///\n");
 	printf("/////////////////////////////////////////////////////////////////////////////\n");
 	printf("\n");
     printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
 	getchar();
+  return op;
 }
 
 void pesquisarReceita(void) {
