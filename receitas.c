@@ -95,7 +95,8 @@ char menuPrincipal(void) {
 	getchar();
         return op;
 }
-void novaReceita(void) {
+char novaReceita(void) { // sam
+  char op;
     system("clear");
 	printf("\n");
 	printf("/////////////////////////////////////////////////////////////////////////////\n");
@@ -118,13 +119,16 @@ void novaReceita(void) {
 	printf("///           3. adicionar passo a passo                                  ///\n");
 	printf("///           0. Voltar ao menu anterior                                  ///\n");
 	printf("///                                                                       ///\n");
-	printf("///           Escolha a opção desejada:                                   ///\n");
+	printf("///           Escolha a opção desejada:");
+	scanf("%c", &op);
+  getchar();
 	printf("///                                                                       ///\n");
 	printf("///                                                                       ///\n");
 	printf("/////////////////////////////////////////////////////////////////////////////\n");
 	printf("\n");
     printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
 	getchar();
+  return op;
 }
 
 void editReceita(void) {
