@@ -146,6 +146,23 @@ char novaReceita(void) { //
 	getchar();
 }
 
+int alternativasdeedit(void){ //
+  char  alternativasdeedit;
+	do {
+		alternativasdeedit = editReceita();
+		switch( alternativasdeedit) {
+			case 1: 	menuEditNome();
+						break;
+			case 2: 	menuEditIngredientes();
+						break;
+			case 3: 	menuEditpassoapasso();
+						break;
+		} 		
+	} while (alternativasdeedit != 0);
+	return 0;
+}
+
+
 char editReceita(void) { 
   char op;
     system("clear");
