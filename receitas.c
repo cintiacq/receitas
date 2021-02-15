@@ -198,6 +198,35 @@ int editReceita(void) { //
   return alternativasdeedit;
 }
 
+// menu de opçoes da tela de editar receitas
+char menuEditNome(void){ //
+ char editnome [20];
+  system("clear");
+        printf("/////////////////////////////////////////////////////////////////////////////\n");
+	printf("///                                                                       ///\n");
+	printf("///          ===================================================          ///\n");
+	printf("///          = = = = = = = = = = = = = = = = = = = = = = = = = =          ///\n");
+	printf("///          = = = =    Caderno Virtual de Receitas      = = = =          ///\n");
+	printf("///          = = = = = = = = = = = = = = = = = = = = = = = = = =          ///\n");
+	printf("///          ===================================================          ///\n");
+	printf("//1/          Developed by  @CintiaCQ and @Sana-El - Fev, 2021            ///\n");
+	printf("///                                                                       ///\n");
+	printf("/////////////////////////////////////////////////////////////////////////////\n");
+	printf("///                                                                       ///\n");
+	printf("///           = = = = = = = = = = = = = = = = = = = = = = = =             ///\n");
+	printf("///           = = = = = =  Editar nome da receita = = = = = =             ///\n");
+	printf("///           = = = = = = = = = = = = = = = = = = = = = = = =             ///\n");
+	printf("///                                                                       ///\n");
+	printf("///            Cadastrar um novo nome para a receita: "); 
+        scanf("%[A-ZÁÉÍÓÚÂÊÔÇÀÃÕ a-záéíóúâêôçàãõ]", editnome);
+        printf("///                                                                       ///\n");
+	printf("/////////////////////////////////////////////////////////////////////////////\n"); 
+        printf("\n");
+	printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
+	getchar();
+}
+
+
 char delReceita(void) { 
   char op;
     system("clear");
