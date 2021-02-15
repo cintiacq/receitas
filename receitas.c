@@ -109,8 +109,10 @@ int menuPrincipal(void) { //
   return op;
 }
 
-char novaReceita(void) { 
-  char op;
+char novaReceita(void) { //
+  char nomeReceita [20];
+  char novoIngrediente [200];
+  char novopasso [1000];
     system("clear");
 	printf("\n");
 	printf("/////////////////////////////////////////////////////////////////////////////\n");
@@ -128,21 +130,20 @@ char novaReceita(void) {
 	printf("///           = = = = = = = =   nova receita  = = = = = = = =             ///\n");
 	printf("///           = = = = = = = = = = = = = = = = = = = = = = = =             ///\n");
 	printf("///                                                                       ///\n");
-	printf("///           1. adicionar nome da  receita                               ///\n");
-	printf("///           2. adicionar ingredientes                                   ///\n");
-	printf("///           3. adicionar passo a passo                                  ///\n");
-	printf("///           0. Voltar ao menu anterior                                  ///\n");
-	printf("///                                                                       ///\n");
-	printf("///           Escolha a opção desejada:");
-	scanf("%c", &op);
-  getchar();
-	printf("///                                                                       ///\n");
+        printf("///            adicionar nome da  receita:                                ///\n");
+        scanf("%[A-ZÁÉÍÓÚÂÊÔÇÀÃÕ a-záéíóúâêôçàãõ]", nomeReceita);
+        getchar();
+	printf("///            adicionar ingredientes:                                    ///\n");
+        scanf("%[A-ZÁÉÍÓÚÂÊÔÇÀÃÕ a-záéíóúâêôçàãõ],[0-9/]", novoIngrediente);
+        getchar();
+	printf("///            adicionar passo a passo :                                  ///\n");
+        scanf("%[A-ZÁÉÍÓÚÂÊÔÇÀÃÕ a-záéíóúâêôçàãõ],[0-9/]", novopasso);	
+        getchar();
 	printf("///                                                                       ///\n");
 	printf("/////////////////////////////////////////////////////////////////////////////\n");
 	printf("\n");
-    printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
+        printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
 	getchar();
-  return op;
 }
 
 char editReceita(void) { 
