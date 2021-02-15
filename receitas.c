@@ -13,11 +13,16 @@
 #include <stdlib.h>
 
 void menuSobre(void);
-char menuPrincipal(void);  
-char novaReceita(void); 
-char editReceita(void); 
+int menuPrincipal(void); 
+char novaReceita(void);
 char delReceita(void);  
-char pesquisarReceita(void);
+char pesquisarReceita(void); 
+int editReceita(void); 
+/*opçoes de edição*/
+int alternativasdeedit(void);
+char menuEditNome(void);
+char menuEditpassoapasso(void);
+char menuEditIngredientes(void); 
 
 int main(void) { 
   	char opcao; 
