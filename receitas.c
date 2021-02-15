@@ -24,16 +24,23 @@ char menuEditNome(void);
 char menuEditpassoapasso(void);
 char menuEditIngredientes(void); 
 
-int main(void) { 
-  	char opcao; 
-
-    menuSobre(); 
-    novaReceita(); 
-    opcao = menuPrincipal();
-    opcao = editReceita(); 
-    opcao = delReceita(); 
-    opcao = pesquisarReceita(); 
-    return 0;
+int main(void) { //
+  int op;
+  do {
+    op = menuPrincipal();
+    switch (op) {
+      case 1:  novaReceita();
+                break;
+      case 2:   editReceita();
+                break;
+      case 3:   delReceita();
+                break;
+      case 4:   pesquisarReceita();
+                break;
+    }
+  } while (op != 0);
+  printf("The End\n");
+  return 0;
 
 }
 
