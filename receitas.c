@@ -24,7 +24,7 @@ char menuEditNome(void);
 char menuEditpassoapasso(void);
 char menuEditIngredientes(void); 
 
-int main(void) { //
+int main(void) {
   int op;
   do {
     op = menuPrincipal();
@@ -73,7 +73,7 @@ void menuSobre(void) {
     printf("\n");
 }
 
-int menuPrincipal(void) { //
+int menuPrincipal(void) { 
   int op; 
     system("clear");
 	printf("\n");
@@ -109,7 +109,7 @@ int menuPrincipal(void) { //
   return op;
 }
 
-char novaReceita(void) { //
+char novaReceita(void) {
   char nomeReceita [20];
   char novoIngrediente [200];
   char novopasso [1000];
@@ -146,7 +146,7 @@ char novaReceita(void) { //
 	getchar();
 }
 
-int alternativasdeedit(void){ //
+int alternativasdeedit(void){
   char  alternativasdeedit;
 	do {
 		alternativasdeedit = editReceita();
@@ -162,7 +162,7 @@ int alternativasdeedit(void){ //
 	return 0;
 }
 
-int editReceita(void) { //
+int editReceita(void) {
   int alternativasdeedit;
     system("clear");
 	printf("\n");
@@ -193,13 +193,13 @@ int editReceita(void) { //
 	printf("///                                                                       ///\n");
 	printf("/////////////////////////////////////////////////////////////////////////////\n");
 	printf("\n");
-    printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
+        printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
 	getchar();
   return alternativasdeedit;
 }
 
 // menu de opçoes da tela de editar receitas
-char menuEditNome(void){ //
+char menuEditNome(void){
  char editnome [20];
   system("clear");
         printf("/////////////////////////////////////////////////////////////////////////////\n");
@@ -226,7 +226,7 @@ char menuEditNome(void){ //
 	getchar();
 }
 
-char menuEditIngredientes(void){ //
+char menuEditIngredientes(void){
  char editingredientes[200];
  system("clear");
         printf("/////////////////////////////////////////////////////////////////////////////\n");
@@ -253,7 +253,7 @@ char menuEditIngredientes(void){ //
 	getchar();
 }
 
-char menuEditpassoapasso(void){ //
+char menuEditpassoapasso(void){
  char editpassoapasso [2000];
  system("clear");
         printf("/////////////////////////////////////////////////////////////////////////////\n");
@@ -280,7 +280,7 @@ char menuEditpassoapasso(void){ //
 	getchar();
 }
 
-char delReceita(void) { //
+char delReceita(void) {
   char del [20];
     system("clear");
 	printf("\n");
@@ -338,17 +338,17 @@ char delReceita(void) {
 	printf("///                                                                       ///\n");
 	printf("///           Escolha a opção desejada:                                   ///\n");
 	scanf("%c", &op);
-  getchar();
-  printf("///                                                                       ///\n");
+        getchar();
+        printf("///                                                                       ///\n");
 	printf("///                                                                       ///\n");
 	printf("/////////////////////////////////////////////////////////////////////////////\n");
 	printf("\n");
-    printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
+        printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
 	getchar();
   return op;
 }
 
-char pesquisarReceita(void) { //
+char pesquisarReceita(void) {
   char ingredientes[1000];
     system("clear");
 	printf("\n");
