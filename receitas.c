@@ -72,8 +72,9 @@ void menuSobre(void) {
     printf("///////////////////////////////////////////////////////////////////////////////\n");
     printf("\n");
 }
-char menuPrincipal(void) {
-  char op; 
+
+int menuPrincipal(void) { //
+  int op; 
     system("clear");
 	printf("\n");
 	printf("/////////////////////////////////////////////////////////////////////////////\n");
@@ -98,15 +99,16 @@ char menuPrincipal(void) {
         printf("///           0. Encerra o programa                                       ///\n");
 	printf("///                                                                       ///\n");
 	printf("///           Escolha a opção desejada:");
-        scanf("%c", &op);
+        scanf("%d", &op);
 	getchar();
 	printf("///                                                                       ///\n");
 	printf("/////////////////////////////////////////////////////////////////////////////\n");
 	printf("\n");
         printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
 	getchar();
-        return op;
+  return op;
 }
+
 char novaReceita(void) { 
   char op;
     system("clear");
