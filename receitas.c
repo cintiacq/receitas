@@ -162,9 +162,8 @@ int alternativasdeedit(void){ //
 	return 0;
 }
 
-
-char editReceita(void) { 
-  char op;
+int editReceita(void) { //
+  int alternativasdeedit;
     system("clear");
 	printf("\n");
 	printf("/////////////////////////////////////////////////////////////////////////////\n");
@@ -188,15 +187,15 @@ char editReceita(void) {
 	printf("///           0. Voltar ao menu anterior                                  ///\n");
 	printf("///                                                                       ///\n");
 	printf("///           Escolha a opção desejada:");
-        scanf("%c", &op);
+        scanf("%d", &alternativasdeedit);
         getchar();
 	printf("///                                                                       ///\n");
 	printf("///                                                                       ///\n");
 	printf("/////////////////////////////////////////////////////////////////////////////\n");
 	printf("\n");
-        printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
+    printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
 	getchar();
-  return op;
+  return alternativasdeedit;
 }
 
 char delReceita(void) { 
