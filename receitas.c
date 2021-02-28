@@ -579,6 +579,8 @@ char menuProcedimento(void) {
   return op;
 }
 
+char pesquisarReceita(void) {
+  char ingredientes[1000];
 void adicionarProcedimento(void) {
   char adicionarProcedimento [2000];
     system("clear");
@@ -595,7 +597,13 @@ void adicionarProcedimento(void) {
 	printf("/////////////////////////////////////////////////////////////////////////////\n");
 	printf("///                                                                       ///\n");
 	printf("///           = = = = = = = = = = = = = = = = = = = = = = = =             ///\n");
-	printf("///           = = = = = =  Adicionar Procedimento = = = = = =             ///\n");
+	printf("///           = = = Pesquisar Receita por ingreditene = = = =              ///\n");
+	printf("///           = = = = = = = = = = = = = = = = = = = = = = = =             ///\n");
+	printf("///                                                                       ///\n");
+	printf("///           ingredientes: ");
+        scanf("%[A-ZÁÉÍÓÚÂÊÔÇÀÃÕ a-záéíóúâêôçàãõ],[0-9/]", ingredientes);
+	getchar();
+  printf("///           = = = = = =  Adicionar Procedimento = = = = = =             ///\n");
 	printf("///           = = = = = = = = = = = = = = = = = = = = = = = =             ///\n");
 	printf("///                                                                       ///\n");
 	printf("///            adicionar procedimento:                                    ///\n");
