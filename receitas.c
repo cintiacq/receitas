@@ -9,31 +9,72 @@
 ///////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////
 
+
+
+
 #include <stdio.h>
 #include <stdlib.h>
+#include <time.h>
 
-void menuSobre(void);
-char menuPrincipal(void);  
-char novaReceita(void); 
-char editReceita(void); 
-char delReceita(void);  
-char pesquisarReceita(void);
+/////////////////////////////////////////////////////////////////////////////// 
+/// 						Assinaturas das funções
+///////////////////////////////////////////////////////////////////////////////
+void menuSobre(void);//
+int menuPrincipal(void); //
+
+void moduloReceita(void); //
+
+char menuReceita(void);//
+void novaReceita(void);//
+void delReceita(void);  //
+void pesquisarReceita(void);//
+void listareceitas(void); //
+void editReceita(void); //
+void menuEditNome(void);//
+
+/////////////////////////////////
+
+void moduloIngrediente(void);
+
+char menuIngredientes(void);
+void adicionarIngrediente(void);
+void menuEditIngrediente(void);
+void listaingredientes(void);
+void apagaringredientes(void);
+void pesquisaringredientes(void);
+
+/////////////////////////////////
+
+void moduloProcedimento(void);
+
+char menuProcedimento(void);
+void adicionarProcedimento(void);
+void listarprocedimento(void);
+void apagarProcedimento(void);
+void delay(int);
+
 
 int main(void) { 
-  	char opcao; 
-
-    menuSobre(); 
-    novaReceita(); 
-    opcao = menuPrincipal();
-    opcao = editReceita(); 
-    opcao = delReceita(); 
-    opcao = pesquisarReceita(); 
-    return 0;
+  int op;
+  do {
+    op = menuPrincipal();
+    switch (op) {
+      case '1':  moduloReceita();
+                break;
+      case '2':  moduloIngrediente();
+                break;
+      case '3':  moduloProcedimento();
+                break;
+    }
+  } while (op != 0);
+  printf("The End\n");
+  return 0;
 
 }
 
 
 void menuSobre(void) {
+    system("clear");
     printf("\n");
     printf("///////////////////////////////////////////////////////////////////////////////\n");
     printf("///////////////////////////////////////////////////////////////////////////////\n");
@@ -60,7 +101,17 @@ void menuSobre(void) {
     printf("///////////////////////////////////////////////////////////////////////////////\n");
     printf("\n");
 }
-char menuPrincipal(void) {
+
+void delay(int segundos) {
+  int tempo = 500000 * segundos;
+  clock_t inicio = clock();
+  while (clock() < inicio + tempo) {
+    // não faz nada, apenas gasta tempo
+  }
+}
+
+
+int menuPrincipal(void) { 
   char op; 
     system("clear");
 	printf("\n");
@@ -79,24 +130,84 @@ char menuPrincipal(void) {
 	printf("///           = = = = = = = =  Menu Principal = = = = = = = =             ///\n");
 	printf("///           = = = = = = = = = = = = = = = = = = = = = = = =             ///\n");
 	printf("///                                                                       ///\n");
-	printf("///           1. Criar nova receita                                       ///\n");
-	printf("///           2. Edite uma receita                                        ///\n");
-	printf("///           3. Deletar receita                                          ///\n");
-	printf("///           4. procurar receita por ingrediente                         ///\n");
-        printf("///           0. Encerra o programa                                       ///\n");
+	printf("///           1. Modulo receita                                           ///\n");
+	printf("///           2. Modulo ingrediente                                       ///\n");
+	printf("///           3. Modulo procedimento                                      ///\n");
+  printf("///           0. Encerra o programa                                       ///\n");
 	printf("///                                                                       ///\n");
 	printf("///           Escolha a opção desejada:");
-        scanf("%c", &op);
+  scanf("%c", &op);
 	getchar();
 	printf("///                                                                       ///\n");
 	printf("/////////////////////////////////////////////////////////////////////////////\n");
 	printf("\n");
-        printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
+    printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
 	getchar();
-        return op;
+  delay(1);
+  return op;
 }
-char novaReceita(void) { 
-  char op;
+
+void moduloReceita(void){
+  	char op;
+	do {
+		op = menuReceita();
+		switch(op) {
+			case '1': 	novaReceita();
+						break;
+			case '2': 	editReceita();
+						break;
+			case '3': 	delReceita();
+						break;
+			case '4': 	pesquisarReceita();
+						break;
+      case '5': 	listareceitas();
+						break;
+		} 		
+	} while (op != '0');
+}
+
+
+char menuReceita(void) { 
+  char op; 
+    system("clear");
+	printf("\n");
+	printf("/////////////////////////////////////////////////////////////////////////////\n");
+	printf("///                                                                       ///\n");
+	printf("///          ===================================================          ///\n");
+	printf("///          = = = = = = = = = = = = = = = = = = = = = = = = = =          ///\n");
+	printf("///          = = = =    Caderno Virtual de Receitas      = = = =          ///\n");
+	printf("///          = = = = = = = = = = = = = = = = = = = = = = = = = =          ///\n");
+	printf("///          ===================================================          ///\n");
+	printf("///                Developed by  @cintiacq and @Sana-El - Fev, 2021       ///\n");
+	printf("///                                                                       ///\n");
+	printf("/////////////////////////////////////////////////////////////////////////////\n");
+	printf("///                                                                       ///\n");
+	printf("///           = = = = = = = = = = = = = = = = = = = = = = = =             ///\n");
+	printf("///           = = = = = = = =   Menu Receita  = = = = = = = =             ///\n");
+	printf("///           = = = = = = = = = = = = = = = = = = = = = = = =             ///\n");
+	printf("///                                                                       ///\n");
+	printf("///           1. Criar nova receita                                       ///\n");
+	printf("///           2. Edite uma receita                                        ///\n");
+	printf("///           3. Deletar receita                                          ///\n");
+	printf("///           4. procurar receita por ingrediente                         ///\n");
+  printf("///           5. listar receitas                                          ///\n");
+  printf("///           0. Encerra o programa                                       ///\n");
+	printf("///                                                                       ///\n");
+	printf("///           Escolha a opção desejada:");
+  scanf("%c", &op);
+	getchar();
+	printf("///                                                                       ///\n");
+	printf("/////////////////////////////////////////////////////////////////////////////\n");
+	printf("\n");
+    printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
+	getchar();
+  delay(1);
+  return op;
+}
+
+void novaReceita(void) {
+  char nomeReceita[20];
+
     system("clear");
 	printf("\n");
 	printf("/////////////////////////////////////////////////////////////////////////////\n");
@@ -114,25 +225,19 @@ char novaReceita(void) {
 	printf("///           = = = = = = = =   nova receita  = = = = = = = =             ///\n");
 	printf("///           = = = = = = = = = = = = = = = = = = = = = = = =             ///\n");
 	printf("///                                                                       ///\n");
-	printf("///           1. adicionar nome da  receita                               ///\n");
-	printf("///           2. adicionar ingredientes                                   ///\n");
-	printf("///           3. adicionar passo a passo                                  ///\n");
-	printf("///           0. Voltar ao menu anterior                                  ///\n");
-	printf("///                                                                       ///\n");
-	printf("///           Escolha a opção desejada:");
-	scanf("%c", &op);
+  printf("///            adicionar nome da  receita:                                ///\n");
+  scanf("%[A-ZÁÉÍÓÚÂÊÔÇÀÃÕ a-záéíóúâêôçàãõ]", nomeReceita);
   getchar();
-	printf("///                                                                       ///\n");
 	printf("///                                                                       ///\n");
 	printf("/////////////////////////////////////////////////////////////////////////////\n");
 	printf("\n");
-    printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
-	getchar();
-  return op;
+  delay(1);
 }
 
-char editReceita(void) { 
-  char op;
+
+void editReceita(void) {
+  char nome[20];
+  char novonome[20];
     system("clear");
 	printf("\n");
 	printf("/////////////////////////////////////////////////////////////////////////////\n");
@@ -150,25 +255,73 @@ char editReceita(void) {
 	printf("///           = = = = = = = =  Editar receita = = = = = = = =             ///\n");
 	printf("///           = = = = = = = = = = = = = = = = = = = = = = = =             ///\n");
 	printf("///                                                                       ///\n");
-	printf("///           1. Cadastrar um novo nome para a receita                    ///\n");
-	printf("///           2. alterar ingredientes                                     ///\n");
-	printf("///           3. Atualizar passo a passo                                  ///\n");
-	printf("///           0. Voltar ao menu anterior                                  ///\n");
-	printf("///                                                                       ///\n");
-	printf("///           Escolha a opção desejada:");
-        scanf("%c", &op);
-        getchar();
+	printf("///          Digite o nome da receita que quer alterar: ");
+	scanf("%[A-ZÁÉÍÓÚÂÊÔÇÀÃÕ a-záéíóúâêôçàãõ]", nome);
+	getchar();
+	printf("///          Digite o novo nome: ");
+	scanf("%[A-ZÁÉÍÓÚÂÊÔÇÀÃÕ a-záéíóúâêôçàãõ]", novonome);
+  getchar();
 	printf("///                                                                       ///\n");
 	printf("///                                                                       ///\n");
 	printf("/////////////////////////////////////////////////////////////////////////////\n");
 	printf("\n");
-        printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
-	getchar();
-  return op;
+  printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
 }
 
-char delReceita(void) { 
-  char op;
+void menuEditNome(void){ 
+ char editnome[20];
+ system("clear");
+  printf("/////////////////////////////////////////////////////////////////////////////\n");
+	printf("///                                                                       ///\n");
+	printf("///          ===================================================          ///\n");
+	printf("///          = = = = = = = = = = = = = = = = = = = = = = = = = =          ///\n");
+	printf("///          = = = =    Caderno Virtual de Receitas      = = = =          ///\n");
+	printf("///          = = = = = = = = = = = = = = = = = = = = = = = = = =          ///\n");
+	printf("///          ===================================================          ///\n");
+	printf("//1/                Developed by  @CintiaCQ and @Sana-El - Fev, 2021       ///\n");
+	printf("///                                                                       ///\n");
+	printf("/////////////////////////////////////////////////////////////////////////////\n");
+	printf("///                                                                       ///\n");
+	printf("///           = = = = = = = = = = = = = = = = = = = = = = = =             ///\n");
+	printf("///           = = = = = =  Editar nome da receita = = = = = =             ///\n");
+	printf("///           = = = = = = = = = = = = = = = = = = = = = = = =             ///\n");
+	printf("///                                                                       ///\n");
+	printf("///            Cadastrar um novo nome para a receita: "); 
+  scanf("%[A-ZÁÉÍÓÚÂÊÔÇÀÃÕ a-záéíóúâêôçàãõ]", editnome);
+  printf("///                                                                       ///\n");
+	printf("/////////////////////////////////////////////////////////////////////////////\n"); 
+  printf("\n");
+	printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
+}
+
+void menuEditIngredientes(void){
+ char editingredientes[200];
+ system("clear");
+  printf("/////////////////////////////////////////////////////////////////////////////\n");
+	printf("///                                                                       ///\n");
+	printf("///          ===================================================          ///\n");
+	printf("///          = = = = = = = = = = = = = = = = = = = = = = = = = =          ///\n");
+	printf("///          = = = =    Caderno Virtual de Receitas      = = = =          ///\n");
+	printf("///          = = = = = = = = = = = = = = = = = = = = = = = = = =          ///\n");
+	printf("///          ===================================================          ///\n");
+	printf("///                Developed by  @CintiaCQ and @Sana-El - Fev, 2021       ///\n");
+	printf("///                                                                       ///\n");
+	printf("/////////////////////////////////////////////////////////////////////////////\n");
+	printf("///                                                                       ///\n");
+	printf("///           = = = = = = = = = = = = = = = = = = = = = = = =             ///\n");
+	printf("///           = = = = Editar Ingredientes da receita  = = = =             ///\n");
+	printf("///           = = = = = = = = = = = = = = = = = = = = = = = =             ///\n");
+	printf("///                                                                       ///\n");
+	printf("///            Alterar ingredientes da receita:                           ///\n");
+  scanf("%[A-ZÁÉÍÓÚÂÊÔÇÀÃÕ a-záéíóúâêôçàãõ],[0-9/]", editingredientes);
+  printf("///                                                                       ///\n");
+	printf("/////////////////////////////////////////////////////////////////////////////\n"); 
+  printf("\n");
+	printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
+}
+
+void delReceita(void) {
+  char del [20];
     system("clear");
 	printf("\n");
 	printf("/////////////////////////////////////////////////////////////////////////////\n");
@@ -186,27 +339,20 @@ char delReceita(void) {
 	printf("///           = = = = = = = = Deletar Receita = = = = = = = =             ///\n");
 	printf("///           = = = = = = = = = = = = = = = = = = = = = = = =             ///\n");
 	printf("///                                                                       ///\n");
-	printf("///           1. Deletar ingredientes                                     ///\n");
-	printf("///           2. Deletar passo a passo                                    ///\n");
-	printf("///           3. Deletar nome                                             ///\n");
-	printf("///           4. Deletar a receita completa                               ///\n");
-	printf("///           0. Voltar ao menu anterior                                  ///\n");
+	printf("///           digite o nome da receita na qual quer descartar:            ///\n");
 	printf("///                                                                       ///\n");
-	printf("///           Escolha a opção desejada:                                   ///\n");
-	scanf("%c", &op);
+  scanf("%[A-ZÁÉÍÓÚÂÊÔÇÀÃÕ a-záéíóúâêôçàãõ]", del);
   getchar();
   printf("///                                                                       ///\n");
 	printf("///                                                                       ///\n");
 	printf("/////////////////////////////////////////////////////////////////////////////\n");
 	printf("\n");
-    printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
-	getchar();
-  return op;
+  printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
 }
 
-char pesquisarReceita(void) {
+void pesquisarReceita(void) {
   char ingredientes[1000];
-    system("clear");
+  system("clear");
 	printf("\n");
 	printf("/////////////////////////////////////////////////////////////////////////////\n");
 	printf("///                                                                       ///\n");
@@ -220,11 +366,11 @@ char pesquisarReceita(void) {
 	printf("/////////////////////////////////////////////////////////////////////////////\n");
 	printf("///                                                                       ///\n");
 	printf("///           = = = = = = = = = = = = = = = = = = = = = = = =             ///\n");
-	printf("///           = = = Pesquisar Receita por ingreditene = = = =              ///\n");
+	printf("///           = = = Pesquisar Receita por ingreditene = = = =             ///\n");
 	printf("///           = = = = = = = = = = = = = = = = = = = = = = = =             ///\n");
 	printf("///                                                                       ///\n");
 	printf("///           ingredientes: ");
-        scanf("%[A-ZÁÉÍÓÚÂÊÔÇÀÃÕ a-záéíóúâêôçàãõ],[0-9/]", ingredientes);
+  scanf("%[A-ZÁÉÍÓÚÂÊÔÇÀÃÕ a-záéíóúâêôçàãõ],[0-9/]", ingredientes);
 	getchar();
 	printf("///                                                                       ///\n");
 	printf("///                                                                       ///\n");
@@ -232,4 +378,273 @@ char pesquisarReceita(void) {
 	printf("\n");
 	printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
 	getchar();
+}
+
+void listareceitas(void) {
+// em desenvolvimento
+}
+
+void moduloIngrediente(void){
+  	char op;
+	do {
+		op = menuIngredientes();
+		switch(op) {
+			case '1': 	adicionarIngrediente();
+						break;
+			case '2': 	listaingredientes();
+						break;
+			case '3': 	apagaringredientes();
+						break;
+			case '4': 	pesquisaringredientes();
+						break;
+		} 		
+	} while (op != '0');
+}
+
+
+char menuIngredientes(void) { 
+  char op; 
+    system("clear");
+	printf("\n");
+	printf("/////////////////////////////////////////////////////////////////////////////\n");
+	printf("///                                                                       ///\n");
+	printf("///          ===================================================          ///\n");
+	printf("///          = = = = = = = = = = = = = = = = = = = = = = = = = =          ///\n");
+	printf("///          = = = =    Caderno Virtual de Receitas      = = = =          ///\n");
+	printf("///          = = = = = = = = = = = = = = = = = = = = = = = = = =          ///\n");
+	printf("///          ===================================================          ///\n");
+	printf("///                Developed by  @cintiacq and @Sana-El - Fev, 2021       ///\n");
+	printf("///                                                                       ///\n");
+	printf("/////////////////////////////////////////////////////////////////////////////\n");
+	printf("///                                                                       ///\n");
+	printf("///           = = = = = = = = = = = = = = = = = = = = = = = =             ///\n");
+	printf("///           = = = = = =  = Menu Ingrediente = = = = = = = =             ///\n");
+	printf("///           = = = = = = = = = = = = = = = = = = = = = = = =             ///\n");
+	printf("///                                                                       ///\n");
+	printf("///           1. Adicionar ingredientes                                   ///\n");
+	printf("///           2. Listar ingredientes                                      ///\n");
+	printf("///           3. Apagar ingredientes                                      ///\n");
+	printf("///           4. pesquisar ingredientes                                   ///\n");  
+  printf("///           0. Encerra o programa                                       ///\n");
+	printf("///                                                                       ///\n");
+	printf("///           Escolha a opção desejada:");
+  scanf("%c", &op);
+	getchar();
+	printf("///                                                                       ///\n");
+	printf("/////////////////////////////////////////////////////////////////////////////\n");
+	printf("\n");
+    printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
+	getchar();
+  return op;
+}
+
+void adicionarIngrediente(void) {
+  char adicionarIngrediente [200];
+    system("clear");
+	printf("\n");
+	printf("/////////////////////////////////////////////////////////////////////////////\n");
+	printf("///                                                                       ///\n");
+	printf("///          ===================================================          ///\n");
+	printf("///          = = = = = = = = = = = = = = = = = = = = = = = = = =          ///\n");
+	printf("///          = = = =    Caderno Virtual de Receitas      = = = =          ///\n");
+	printf("///          = = = = = = = = = = = = = = = = = = = = = = = = = =          ///\n");
+	printf("///          ===================================================          ///\n");
+	printf("///                Developed by  @Cintiacq and @Sana-El - Jan, 2021       ///\n");
+	printf("///                                                                       ///\n");
+	printf("/////////////////////////////////////////////////////////////////////////////\n");
+	printf("///                                                                       ///\n");
+	printf("///           = = = = = = = = = = = = = = = = = = = = = = = =             ///\n");
+	printf("///           = = = = = =  Adicionar Ingrediente  = = = = = =             ///\n");
+	printf("///           = = = = = = = = = = = = = = = = = = = = = = = =             ///\n");
+	printf("///                                                                       ///\n");
+	printf("///            adicionar ingrediente:                                    ///\n");
+  scanf("%[A-ZÁÉÍÓÚÂÊÔÇÀÃÕ a-záéíóúâêôçàãõ],[0-9/]", adicionarIngrediente);
+  getchar();
+	printf("///                                                                       ///\n");
+	printf("/////////////////////////////////////////////////////////////////////////////\n");
+	printf("\n");
+  printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
+	getchar();
+}
+
+void apagaringredientes(void) {
+  char apagarIngrediente [200];
+    system("clear");
+	printf("\n");
+	printf("/////////////////////////////////////////////////////////////////////////////\n");
+	printf("///                                                                       ///\n");
+	printf("///          ===================================================          ///\n");
+	printf("///          = = = = = = = = = = = = = = = = = = = = = = = = = =          ///\n");
+	printf("///          = = = =    Caderno Virtual de Receitas      = = = =          ///\n");
+	printf("///          = = = = = = = = = = = = = = = = = = = = = = = = = =          ///\n");
+	printf("///          ===================================================          ///\n");
+	printf("///                Developed by  @Cintiacq and @Sana-El - Jan, 2021       ///\n");
+	printf("///                                                                       ///\n");
+	printf("/////////////////////////////////////////////////////////////////////////////\n");
+	printf("///                                                                       ///\n");
+	printf("///           = = = = = = = = = = = = = = = = = = = = = = = =             ///\n");
+	printf("///           = = = = = =    Apagar Ingrediente   = = = = = =              ///\n");
+	printf("///           = = = = = = = = = = = = = = = = = = = = = = = =             ///\n");
+	printf("///                                                                       ///\n");
+	printf("///           Digite o nome do ingrediente a ser apagado:                 ///\n");
+  scanf("%[A-ZÁÉÍÓÚÂÊÔÇÀÃÕ a-záéíóúâêôçàãõ],[0-9/]", apagarIngrediente);
+  getchar();
+	printf("///                                                                       ///\n");
+	printf("/////////////////////////////////////////////////////////////////////////////\n");
+	printf("\n");
+  printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
+
+}
+
+void pesquisaringredientes(void) {
+  char pesquisarIngrediente [200];
+    system("clear");
+	printf("\n");
+	printf("/////////////////////////////////////////////////////////////////////////////\n");
+	printf("///                                                                       ///\n");
+	printf("///          ===================================================          ///\n");
+	printf("///          = = = = = = = = = = = = = = = = = = = = = = = = = =          ///\n");
+	printf("///          = = = =    Caderno Virtual de Receitas      = = = =          ///\n");
+	printf("///          = = = = = = = = = = = = = = = = = = = = = = = = = =          ///\n");
+	printf("///          ===================================================          ///\n");
+	printf("///                Developed by  @Cintiacq and @Sana-El - Jan, 2021       ///\n");
+	printf("///                                                                       ///\n");
+	printf("/////////////////////////////////////////////////////////////////////////////\n");
+	printf("///                                                                       ///\n");
+	printf("///           = = = = = = = = = = = = = = = = = = = = = = = =             ///\n");
+	printf("///           = = = = = =  Pesquisar Ingrediente  = = = = = =             ///\n");
+	printf("///           = = = = = = = = = = = = = = = = = = = = = = = =             ///\n");
+	printf("///                                                                       ///\n");
+	printf("///            Pesquisar ingrediente:                                    ///\n");
+  scanf("%[A-ZÁÉÍÓÚÂÊÔÇÀÃÕ a-záéíóúâêôçàãõ],[0-9/]", pesquisarIngrediente);
+  getchar();
+	printf("///                                                                       ///\n");
+	printf("/////////////////////////////////////////////////////////////////////////////\n");
+	printf("\n");
+  printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
+}
+
+void listaingredientes(void) {
+// em desenvolvimento
+}
+
+void moduloProcedimento(void){
+  	char op;
+	do {
+		op = menuProcedimento();
+		switch(op) {
+			case '1': 	adicionarProcedimento();
+						break;
+			case '2': 	listarprocedimento();
+						break;
+			case '3': 	apagarProcedimento();
+						break;
+		} 		
+	} while (op != '0');
+}
+
+
+char menuProcedimento(void) { 
+  char op; 
+    system("clear");
+	printf("\n");
+	printf("/////////////////////////////////////////////////////////////////////////////\n");
+	printf("///                                                                       ///\n");
+	printf("///          ===================================================          ///\n");
+	printf("///          = = = = = = = = = = = = = = = = = = = = = = = = = =          ///\n");
+	printf("///          = = = =    Caderno Virtual de Receitas      = = = =          ///\n");
+	printf("///          = = = = = = = = = = = = = = = = = = = = = = = = = =          ///\n");
+	printf("///          ===================================================          ///\n");
+	printf("///                Developed by  @cintiacq and @Sana-El - Fev, 2021       ///\n");
+	printf("///                                                                       ///\n");
+	printf("/////////////////////////////////////////////////////////////////////////////\n");
+	printf("///                                                                       ///\n");
+	printf("///           = = = = = = = = = = = = = = = = = = = = = = = =             ///\n");
+	printf("///           = = = = = = = Menu Procedimento = = = = = = = =             ///\n");
+	printf("///           = = = = = = = = = = = = = = = = = = = = = = = =             ///\n");
+	printf("///                                                                       ///\n");
+	printf("///           1. Adicionar procedimento                                   ///\n");
+	printf("///           2. Listar procedimento                                      ///\n");
+	printf("///           3. Apagar procedimento                                      ///\n");
+  printf("///           0. Encerra o programa                                       ///\n");
+	printf("///                                                                       ///\n");
+	printf("///           Escolha a opção desejada:");
+  scanf("%c", &op);
+	getchar();
+	printf("///                                                                       ///\n");
+	printf("/////////////////////////////////////////////////////////////////////////////\n");
+	printf("\n");
+    printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
+	getchar();
+  return op;
+}
+
+char pesquisarReceita(void) {
+  char ingredientes[1000];
+void adicionarProcedimento(void) {
+  char adicionarProcedimento [2000];
+    system("clear");
+	printf("\n");
+	printf("/////////////////////////////////////////////////////////////////////////////\n");
+	printf("///                                                                       ///\n");
+	printf("///          ===================================================          ///\n");
+	printf("///          = = = = = = = = = = = = = = = = = = = = = = = = = =          ///\n");
+	printf("///          = = = =    Caderno Virtual de Receitas      = = = =          ///\n");
+	printf("///          = = = = = = = = = = = = = = = = = = = = = = = = = =          ///\n");
+	printf("///          ===================================================          ///\n");
+	printf("///                Developed by  @Cintiacq and @Sana-El - Jan, 2021       ///\n");
+	printf("///                                                                       ///\n");
+	printf("/////////////////////////////////////////////////////////////////////////////\n");
+	printf("///                                                                       ///\n");
+	printf("///           = = = = = = = = = = = = = = = = = = = = = = = =             ///\n");
+	printf("///           = = = Pesquisar Receita por ingreditene = = = =              ///\n");
+	printf("///           = = = = = = = = = = = = = = = = = = = = = = = =             ///\n");
+	printf("///                                                                       ///\n");
+	printf("///           ingredientes: ");
+        scanf("%[A-ZÁÉÍÓÚÂÊÔÇÀÃÕ a-záéíóúâêôçàãõ],[0-9/]", ingredientes);
+	getchar();
+  printf("///           = = = = = =  Adicionar Procedimento = = = = = =             ///\n");
+	printf("///           = = = = = = = = = = = = = = = = = = = = = = = =             ///\n");
+	printf("///                                                                       ///\n");
+	printf("///            adicionar procedimento:                                    ///\n");
+  scanf("%[A-ZÁÉÍÓÚÂÊÔÇÀÃÕ a-záéíóúâêôçàãõ],[0-9/]", adicionarProcedimento);
+  getchar();
+	printf("///                                                                       ///\n");
+	printf("/////////////////////////////////////////////////////////////////////////////\n");
+	printf("\n");
+  printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
+}
+
+void apagarProcedimento(void) {
+  char apagarProcedimento [2000];
+    system("clear");
+	printf("\n");
+	printf("/////////////////////////////////////////////////////////////////////////////\n");
+	printf("///                                                                       ///\n");
+	printf("///          ===================================================          ///\n");
+	printf("///          = = = = = = = = = = = = = = = = = = = = = = = = = =          ///\n");
+	printf("///          = = = =    Caderno Virtual de Receitas      = = = =          ///\n");
+	printf("///          = = = = = = = = = = = = = = = = = = = = = = = = = =          ///\n");
+	printf("///          ===================================================          ///\n");
+	printf("///                Developed by  @Cintiacq and @Sana-El - Jan, 2021       ///\n");
+	printf("///                                                                       ///\n");
+	printf("/////////////////////////////////////////////////////////////////////////////\n");
+	printf("///                                                                       ///\n");
+	printf("///           = = = = = = = = = = = = = = = = = = = = = = = =             ///\n");
+	printf("///           = = = = = =  Apagar Procedimento = = = = = =             ///\n");
+	printf("///           = = = = = = = = = = = = = = = = = = = = = = = =             ///\n");
+	printf("///                                                                       ///\n");
+	printf("///            adicionar procedimento:                                    ///\n");
+  scanf("%[A-ZÁÉÍÓÚÂÊÔÇÀÃÕ a-záéíóúâêôçàãõ],[0-9/]", apagarProcedimento);
+  getchar();
+	printf("///                                                                       ///\n");
+	printf("/////////////////////////////////////////////////////////////////////////////\n");
+	printf("\n");
+  printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
+	getchar();
+}
+
+
+void listarprocedimento(void) {
+// em desenvolvimento
 }
