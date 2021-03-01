@@ -14,7 +14,12 @@
 
 #include <stdio.h>
 #include <stdlib.h>
-#include <time.h>
+#include "modulosobre.h"
+#include "moduloInicial.h"
+#include "moduloReceita.h"
+#include "moduloIngredientes.h"
+#include "moduloProcedimento.h"
+
 
 /////////////////////////////////////////////////////////////////////////////// 
 /// 						Assinaturas das funções
