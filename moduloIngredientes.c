@@ -25,10 +25,10 @@ char menuIngredientes(void) {
 	printf("///           2. Listar ingredientes                                      ///\n");
 	printf("///           3. Apagar ingredientes                                      ///\n");
 	printf("///           4. pesquisar ingredientes                                   ///\n");  
-  printf("///           0. Encerra o programa                                       ///\n");
+        printf("///           0. Encerra o programa                                       ///\n");
 	printf("///                                                                       ///\n");
 	printf("///           Escolha a opção desejada:");
-  scanf("%c", &op);
+        scanf("%c", &op);
 	getchar();
 	printf("///                                                                       ///\n");
 	printf("/////////////////////////////////////////////////////////////////////////////\n");
@@ -39,6 +39,7 @@ char menuIngredientes(void) {
 }
 
 void adicionarIngrediente(void) {
+  int quantidade = 0;
   char adicionarIngrediente [200];
     system("clear");
 	printf("\n");
@@ -57,18 +58,22 @@ void adicionarIngrediente(void) {
 	printf("///           = = = = = =  Adicionar Ingrediente  = = = = = =             ///\n");
 	printf("///           = = = = = = = = = = = = = = = = = = = = = = = =             ///\n");
 	printf("///                                                                       ///\n");
-	printf("///            adicionar ingrediente: ");
-  scanf("%[A-ZÁÉÍÓÚÂÊÔÇÀÃÕ a-záéíóúâêôçàãõ],[0-9/]", adicionarIngrediente);
-  getchar();
-  printf("///          ====================================================         ///\n");
-  printf("///                                                                       ///\n");
-	printf("///                  Ingrediente adicionado com sucesso!                  ///\n");
-  printf("///                  Ingrediente: %s \n", adicionarIngrediente);
+	printf("///            Quantos ingredientes deseja adicionar: ");
+        scanf("%d",&quantidade);
+        for (int i = 0; i < quantidade; i++){
+        printf("Digite o ingrediente(e as porções sem os espaços, com underline(_)):");
+        scanf("%s", adicionarIngrediente);
+        printf("ingrediente: %s\n", adicionarIngrediente);
+        }
+        getchar();
+        printf("///          ====================================================         ///\n");
+        printf("///                                                                       ///\n");
+	printf("///                  Ingredientes adicionados com sucesso!                ///\n");
 	printf("///                                                                       ///\n");
 	printf("///                                                                       ///\n");
 	printf("/////////////////////////////////////////////////////////////////////////////\n");
 	printf("\n");
-  printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
+        printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
 	getchar();
 }
 
@@ -88,23 +93,23 @@ void apagaringredientes(void) {
 	printf("/////////////////////////////////////////////////////////////////////////////\n");
 	printf("///                                                                       ///\n");
 	printf("///           = = = = = = = = = = = = = = = = = = = = = = = =             ///\n");
-	printf("///           = = = = = =    Apagar Ingrediente   = = = = = =              ///\n");
+	printf("///           = = = = = =    Apagar Ingrediente   = = = = = =             ///\n");
 	printf("///           = = = = = = = = = = = = = = = = = = = = = = = =             ///\n");
 	printf("///                                                                       ///\n");
 	printf("///             Digite o nome do ingrediente a ser apagado:");
-  scanf("%[A-ZÁÉÍÓÚÂÊÔÇÀÃÕ a-záéíóúâêôçàãõ],[0-9/]", apagarIngrediente);
-  getchar();
-  printf("///          ====================================================         ///\n");
-  printf("///                                                                       ///\n");
+        scanf("%[A-ZÁÉÍÓÚÂÊÔÇÀÃÕ a-záéíóúâêôçàãõ],[0-9/]", apagarIngrediente);
+        getchar();
+        printf("///          ====================================================         ///\n");
+        printf("///                                                                       ///\n");
 	printf("///                 Ingrediente excluido com sucesso!                     ///\n");
-  getchar();
+        getchar();
 	printf("///                                                                       ///\n");
 	printf("///                                                                       ///\n");
 	printf("/////////////////////////////////////////////////////////////////////////////\n");
 	printf("\n");
-  printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
-  getchar();
-}
+        printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
+        getchar();
+        }
 
 void pesquisaringredientes(void) {
   char pesquisarIngrediente [200];
@@ -126,19 +131,19 @@ void pesquisaringredientes(void) {
 	printf("///           = = = = = = = = = = = = = = = = = = = = = = = =             ///\n");
 	printf("///                                                                       ///\n");
 	printf("///            Pesquisar ingrediente:");
-  scanf("%[A-ZÁÉÍÓÚÂÊÔÇÀÃÕ a-záéíóúâêôçàãõ],[0-9/]", pesquisarIngrediente);
-  getchar();
-  printf("///          ====================================================         ///\n");
-  printf("///                                                                       ///\n");
+        scanf("%[A-ZÁÉÍÓÚÂÊÔÇÀÃÕ a-záéíóúâêôçàãõ],[0-9/]", pesquisarIngrediente);
+        getchar();
+        printf("///          ====================================================         ///\n");
+        printf("///                                                                       ///\n");
 	printf("///                       Ingrediente não encontrado!                     ///\n");
 	printf("///                                                                       ///\n");
-  getchar();
+        getchar();
 	printf("///                                                                       ///\n");
 	printf("/////////////////////////////////////////////////////////////////////////////\n");
 	printf("\n");
-  printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
-  getchar();
-}
+        printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
+        getchar();
+        } 
 
 void listaingredientes(void) {
     system("clear");
@@ -159,11 +164,11 @@ void listaingredientes(void) {
 	printf("///           = = = = = = = = = = = = = = = = = = = = = = = =             ///\n");
 	printf("///                                                                       ///\n");
 	printf("///                                                                       ///\n");
-  printf("///          ====================================================         ///\n");
-  printf("///                                                                       ///\n");
+        printf("///          ====================================================         ///\n");
+        printf("///                                                                       ///\n");
 	printf("///                                                                       ///\n");
 	printf("/////////////////////////////////////////////////////////////////////////////\n");
 	printf("\n");
-  printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
+        printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
 	getchar();
 }
