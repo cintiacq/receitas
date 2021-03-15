@@ -10,6 +10,8 @@
 ///////////////////////////////////////////////////////////////////////////////
 
 
+
+
 #include <stdio.h>
 #include <stdlib.h>
 #include "modulosobre.h"
@@ -17,9 +19,13 @@
 #include "moduloReceita.h"
 #include "moduloIngredientes.h"
 #include "moduloProcedimento.h"
+#include "moduloRelatorio.h"
+#include "validação.h"
 
 
 /////////////////////////////////////////////////////////////////////////////// 
+
+
 
 int main(void) { 
   int op;
@@ -32,8 +38,10 @@ int main(void) {
                 break;
       case '3':  moduloProcedimento();
                 break;
-      case '4':  menuSobre();
-                break;                
+      case '4':  moduloRelatorio();
+                break;
+      case '5':  menuSobre();
+                break;                     
     }
   } while (op != 0);
   printf("The End\n");
@@ -52,9 +60,6 @@ void moduloReceita(void){
 			case '3': 	delReceita();
 						break;
 			case '4': 	pesquisarReceita();
-						break;
-      case '5': 	listareceitas();
-						break;
 		} 		
 	} while (op != '0');
 }
@@ -66,11 +71,9 @@ void moduloIngrediente(void){
 		switch(op) {
 			case '1': 	adicionarIngrediente();
 						break;
-			case '2': 	listaingredientes();
+			case '2': 	apagaringredientes();
 						break;
-			case '3': 	apagaringredientes();
-						break;
-			case '4': 	pesquisaringredientes();
+			case '3': 	pesquisaringredientes();
 						break;
 		} 		
 	} while (op != '0');
@@ -83,11 +86,27 @@ void moduloProcedimento(void){
 		switch(op) {
 			case '1': 	adicionarProcedimento();
 						break;
-			case '2': 	listarprocedimento();
-						break;
-			case '3': 	apagarProcedimento();
+			case '2': 	apagarProcedimento();
 						break;
 		} 		
 	} while (op != '0');
 }
+
+void moduloRelatorio(void){
+  	char op;
+	do {
+		op = menuRelatorio();
+		switch(op) {
+			case '1': 	relatorioreceita();
+						break;
+			case '2': 	relatorioingredientes();
+						break;
+			case '3': 	relatorioprocedimento();
+						break;
+		} 		
+	} while (op != '0');
+}
+
+
+
 
