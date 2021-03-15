@@ -25,3 +25,13 @@ int validaIdentificador (int identificador[]){
   return 0;
   } 
 }
+
+
+
+//importado de https://github.com/flgorgonio/linguasolta/blob/main/util.c
+void limpaTela(void) {
+  
+  if (system("clear") || system("cls")) {
+
+  }
+}
