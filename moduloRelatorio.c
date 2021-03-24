@@ -110,26 +110,3 @@ void relatorioingredientes(void) {
 }
 
 void relatorioprocedimento(void) {
-    limpaTela();
-	printf("\n");
-	printf("/////////////////////////////////////////////////////////////////////////////\n");
-	printf("///                                                                       ///\n");
-	printf("///          ===================================================          ///\n");
-	printf("///          = = = = = = = = = = = = = = = = = = = = = = = = = =          ///\n");
-	printf("///          = = = =    Caderno Virtual de Receitas      = = = =          ///\n");
-	printf("///          = = = = = = = = = = = = = = = = = = = = = = = = = =          ///\n");
-	printf("///          ===================================================          ///\n");
-	printf("///            Developed by  @Cintiacq and @Sana-El - Jan, 2021           ///\n");
-	printf("///                                                                       ///\n");
-	printf("/////////////////////////////////////////////////////////////////////////////\n");
-	printf("///                        (EM DESENVOLVIMENTO)                           ///\n");
-	printf("///           = = = = = = = = = = = = = = = = = = = = = = = =             ///\n");
-	printf("///           = = = = = Relatório de Procedimentos  = = = = =             ///\n");
-	printf("///           = = = = = = = = = = = = = = = = = = = = = = = =             ///\n");
-  printf("///           Todos os procedimentos:                                      ///\n");
-	printf("///                                                                       ///\n");
-	printf("/////////////////////////////////////////////////////////////////////////////\n");
-	printf("\n");
-  printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
-  getchar();
-}
