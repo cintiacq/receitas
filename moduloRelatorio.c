@@ -110,3 +110,40 @@ void relatorioingredientes(void) {
 }
 
 void relatorioprocedimento(void) {
+    limpaTela();
+    char procedimento1[1000] = "Coloque um fio de azeite na frigideira.\nIsso ajuda o ovo a não grudar. Deixe aquecer.\nQuebre o ovo na figideira.\nSalpique uma pitada de sal por todo o ovo.\n Mantenha em fogo baixo até a clara estar\nrendada e a gema, mole.";
+    char procedimento2[1000] = "Coloque o ovo numa vasilha de metal, em seguida preencha-a com agua até cobrir os ovos.\nQuando começar a ferver espere por cerca de 10 minutos e\nlogo após leve-os para a pia e quebre-os embaixo da terneira em água corrente.";
+    char procedimento3[1000] = "Coloque um fio de azeite na frigideira. Isso ajuda o ovo a não grudar.\nDeixe aquecer. Quebre o ovo na figideira.\nSalpique uma pitada de sal por todo o ovo e deixe\ncozinhar mexendo sempre. ";
+	printf("\n");
+	printf("/////////////////////////////////////////////////////////////////////////////\n");
+	printf("///                                                                       ///\n");
+	printf("///          ===================================================          ///\n");
+	printf("///          = = = = = = = = = = = = = = = = = = = = = = = = = =          ///\n");
+	printf("///          = = = =    Caderno Virtual de Receitas      = = = =          ///\n");
+	printf("///          = = = = = = = = = = = = = = = = = = = = = = = = = =          ///\n");
+	printf("///          ===================================================          ///\n");
+	printf("///            Developed by  @Cintiacq and @Sana-El - Jan, 2021           ///\n");
+	printf("///                                                                       ///\n");
+	printf("/////////////////////////////////////////////////////////////////////////////\n");
+
+	printf("///           = = = = = = = = = = = = = = = = = = = = = = = =             ///\n");
+	printf("///           = = = = = Relatório de Procedimentos  = = = = =             ///\n");
+	printf("///           = = = = = = = = = = = = = = = = = = = = = = = =             ///\n");
+  printf("///           Todos os procedimentos:                                     ///\n");
+  printf("///           ===============================================             ///\n");
+    
+    for(int i=0; i < 3; i++){
+    printf("///Procedimento 1:\n %s\n", procedimento1);
+    printf("\n");
+    printf("///Procedimento 2:\n %s\n", procedimento2);
+    printf("\n");
+    printf("///Procedimento 3:\n %s\n", procedimento3);
+    printf("\n");
+    printf("///           ==============================================              ///\n");
+    }
+    printf("///                                                                       ///\n");
+    printf("/////////////////////////////////////////////////////////////////////////////\n");
+    printf("\n");
+    printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
+    getchar();
+  }
