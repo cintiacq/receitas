@@ -7,6 +7,17 @@
 ///                                  STRUCT                                ///
 typedef struct receita Receita;
 
+struct receita {
+  long int identificador;
+  char receita[15];
+  char palavrachave[20];
+  char ingrediente[50];// ainda falta colocar em modo vetor dinamico
+  char procedimento[100];// ainda falta colocar em modo vetor dinamico
+  char status;
+  };
+
+/////////////////////////////////////////////////////////////////////////////// 
+
 
 char menuReceita(void) { 
   char op; 
