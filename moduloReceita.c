@@ -3,6 +3,11 @@
 #include <ctype.h>
 #include "validação.h"
 
+/////////////////////////////////////////////////////////////////////////////// 
+///                                  STRUCT                                ///
+typedef struct receita Receita;
+
+
 char menuReceita(void) { 
   char op; 
     limpaTela();
