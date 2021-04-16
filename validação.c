@@ -16,22 +16,3 @@ int validaNome (char nomeReceita[]) {
      } 
 }
 
-
-
-int validaIdentificador (int identificador[]){
-  if (&identificador > 0){
-    return 1;
-  } else if (!(&identificador > 0)) {
-  return 0;
-  } 
-}
-
-
-
-//importado de https://github.com/flgorgonio/linguasolta/blob/main/util.c
-void limpaTela(void) {
-  
-  if (system("clear") || system("cls")) {
-
-  }
-}

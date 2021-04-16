@@ -8,23 +8,16 @@
 ///            Developed by  @Sana-El e @cintiacq - Jan, 2021               ///
 ///////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////
-
-
-
-
 #include <stdio.h>
 #include <stdlib.h>
 #include "modulosobre.h"
 #include "moduloInicial.h"
 #include "moduloReceita.h"
-#include "moduloIngredientes.h"
-#include "moduloProcedimento.h"
 #include "moduloRelatorio.h"
 #include "validação.h"
+#include "Listas.h"
 
-
-/////////////////////////////////////////////////////////////////////////////// 
-
+#define cls system("clear||cls");
 
 
 int main(void) { 
@@ -34,64 +27,19 @@ int main(void) {
     switch (op) {
       case '1':  moduloReceita();
                 break;
-      case '2':  moduloIngrediente();
+      case '2':  moduloRelatorio();
                 break;
-      case '3':  moduloProcedimento();
-                break;
-      case '4':  moduloRelatorio();
-                break;
-      case '5':  menuSobre();
-                break;                     
+      case '3':   menuSobre();
+                break;           
     }
   } while (op != 0);
   printf("The End\n");
   return 0;
 }
 
-void moduloReceita(void){
-  	char op;
-	do {
-		op = menuReceita();
-		switch(op) {
-			case '1': 	novaReceita();
-						break;
-			case '2': 	editReceita();
-						break;
-			case '3': 	delReceita();
-						break;
-			case '4': 	pesquisarReceita();
-		} 		
-	} while (op != '0');
-}
 
-void moduloIngrediente(void){
-  	char op;
-	do {
-		op = menuIngredientes();
-		switch(op) {
-			case '1': 	adicionarIngrediente();
-						break;
-			case '2': 	apagaringredientes();
-						break;
-			case '3': 	pesquisaringredientes();
-						break;
-		} 		
-	} while (op != '0');
-}
-
-void moduloProcedimento(void){
-  	char op;
-	do {
-		op = menuProcedimento();
-		switch(op) {
-			case '1': 	adicionarProcedimento();
-						break;
-			case '2': 	apagarProcedimento();
-						break;
-		} 		
-	} while (op != '0');
-}
-
+ 
+ 
 void moduloRelatorio(void){
   	char op;
 	do {
@@ -106,7 +54,6 @@ void moduloRelatorio(void){
 		} 		
 	} while (op != '0');
 }
-
 
 
 
