@@ -1,27 +1,45 @@
 #include <stdio.h>
+#include <string.h>
 #include <stdlib.h>
-#include <ctype.h>
-#include "validação.h"
+#include "Listas.h"
+#include "moduloReceita.h"
+#define cls system("clear||cls");
 
-/////////////////////////////////////////////////////////////////////////////// 
-///                                  STRUCT                                ///
+
 typedef struct receita Receita;
 
-struct receita {
-  long int identificador;
-  char receita[15];
-  char palavrachave[20];
-  char ingrediente[50];// ainda falta colocar em modo vetor dinamico
-  char procedimento[100];// ainda falta colocar em modo vetor dinamico
-  char status;
-  };
+void moduloReceita(void){
+    Receita* pagina;
+  int opcao; 
+    opcao = menuPrincipal();
+  while (opcao != 0) {
+    switch (opcao) {
+      case 1 :  pagina = preencheReceita();
+                gravaReceita(pagina);
+                listas();
+                break;
+      case 2 :  pagina = buscaReceita();
+                exibeReceita(pagina);
+                exibelistas();
+                
+                break;
+      case 3 :  pagina = buscaReceita();
+                excluiReceita(pagina);
+                break;
+      case 4 :  listaReceita();
+                exibelistas();
+                break;
+      case 5 :  listaReceitaPorIngrediente();
+                break;
+    }
+    opcao = menuPrincipal();
+  }
+  free(pagina);
+}
 
-/////////////////////////////////////////////////////////////////////////////// 
 
-
-char menuReceita(void) { 
-  char op; 
-    limpaTela();
+int menuPrincipal(void) {
+  int op;
 	printf("\n");
 	printf("/////////////////////////////////////////////////////////////////////////////\n");
 	printf("///                                                                       ///\n");
@@ -39,203 +57,91 @@ char menuReceita(void) {
 	printf("///           = = = = = = = = = = = = = = = = = = = = = = = =             ///\n");
 	printf("///                                                                       ///\n");
   printf("///           0. Encerra o programa                                       ///\n");	
-  printf("///           1. Criar nova receita                                       ///\n");
-	printf("///           2. Edite uma receita                                        ///\n");
+  printf("///           1. Cadastrar Receita                                        ///\n");
+	printf("///           2. Pesquisar Receita                                        ///\n");
 	printf("///           3. Deletar receita                                          ///\n");
-	printf("///           4. procurar receita por ingrediente                         ///\n");
+  printf("///           4. Listar Receitas                                          ///\n");
+	printf("///           5. listar receitas por ingrediente                          ///\n");
 	printf("///                                                                       ///\n");
-	printf("///           Escolha a opção desejada: \n");
-  scanf("%c", &op);
-	getchar();
-	printf("///                                                                       ///\n");
-	printf("/////////////////////////////////////////////////////////////////////////////\n");
-	printf("\n");
-  printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
-	getchar();
+	printf("///           Escolha a opção desejada: ");
+  scanf("%d", &op);
   return op;
 }
 
-void novaReceita(void) {
-  char nomeReceita[20];
-  int identificador;
-    limpaTela();
-	printf("\n");
-	printf("/////////////////////////////////////////////////////////////////////////////\n");
+Receita* preencheReceita(void) {
+  Receita* rct;
+  rct = (Receita*) malloc(sizeof(Receita));
+  printf("\nInforme o código da receita em números: ");
+  scanf("%ld", &rct->identificador);
+  printf("///           Informe o nome da receita: ");
+  scanf(" %80[^\n]", rct->receita);
+  printf("///           Informe as palavras chave: ");
+  scanf(" %50[^\n]", rct->palavrachave);
+
+ 
+   rct->status = 'V';
+  return rct;
+}
+
+void gravaReceita(Receita* rct) {
+  FILE* fp;
+  fp = fopen("Receita.dat", "ab");
+  if (fp == NULL) {
+    printf("Ops! Ocorreu um erro na abertura do arquivo!\n");
+    printf("Não é possível continuar este programa...\n");
+    exit(1);
+  }
+  fwrite(rct, sizeof(Receita), 1, fp);
+  fclose(fp);
+}
+
+Receita* buscaReceita(void) {
+  FILE* fp;
+  Receita* rct;
+  int codigo;
+  cls;
+  printf("\n");
+ 	printf("/////////////////////////////////////////////////////////////////////////////\n");
 	printf("///                                                                       ///\n");
 	printf("///          ===================================================          ///\n");
 	printf("///          = = = = = = = = = = = = = = = = = = = = = = = = = =          ///\n");
 	printf("///          = = = =    Caderno Virtual de Receitas      = = = =          ///\n");
 	printf("///          = = = = = = = = = = = = = = = = = = = = = = = = = =          ///\n");
 	printf("///          ===================================================          ///\n");
-	printf("///            Developed by  @Cintiacq and @Sana-El - Jan, 2021           ///\n");
+	printf("///            Developed by  @CintiaCQ and @Sana-El - Fev, 2021           ///\n");
 	printf("///                                                                       ///\n");
 	printf("/////////////////////////////////////////////////////////////////////////////\n");
 	printf("///                                                                       ///\n");
 	printf("///           = = = = = = = = = = = = = = = = = = = = = = = =             ///\n");
-	printf("///           = = = = = = = =   nova receita  = = = = = = = =             ///\n");
+	printf("///           = = = = = = = =  Buscar Receita = = = = = = = =             ///\n");
 	printf("///           = = = = = = = = = = = = = = = = = = = = = = = =             ///\n");
-	printf("///                                                                       ///\n");
-  printf("///                     adicionar nome da  receita: ");
-  scanf("%[A-ZÁÉÍÓÚÂÊÔÇÀÃÕ a-záéíóúâêôçàãõ]", nomeReceita);
-  getchar();
-  while (validaNome(nomeReceita)==0){
-  printf("Deu erro, tente novamente \n");
-  printf("///                     adicionar nome da  receita: ");
-  scanf("%[A-ZÁÉÍÓÚÂÊÔÇÀÃÕ a-záéíóúâêôçàãõ]", nomeReceita);
-  getchar();
-  } 
-  if (validaNome(nomeReceita)==1) {
-  printf("///                   adicionar número da  receita: ");
-  scanf("%d", &identificador);
-  getchar();
-  while (validaIdentificador(&identificador) == 0){
-  printf("digite apenas numeros maiores que zero\n");
-  printf("///                   adicionar número da  receita: ");
-  scanf("%d", &identificador);
-  getchar();
+  printf("///                      Informe o identificador: "); 
+  scanf("%d", &codigo);
+  rct = (Receita*) malloc(sizeof(Receita));
+  fp = fopen("Receita.dat", "rb");
+  printf("///                                                                       ///\n");
+	printf("/////////////////////////////////////////////////////////////////////////////\n");
+  if (fp == NULL) {
+    printf("Ops! Ocorreu um erro na abertura do arquivo!\n");
+    printf("Não é possível continuar este programa...\n");
+    exit(1);
+  }
+  while(!feof(fp)) {
+    fread(rct, sizeof(Receita), 1, fp);
+    if ((rct->identificador == codigo) && (rct->status != 'x')) {
+      fclose(fp);
+      return rct;
     }
   }
-  printf("///          ====================================================         ///\n");
-  printf("///                                                                       ///\n");
-	printf("///                  Nome adicionado com sucesso!                         ///\n");
-  printf("///                  Nome: %s \n", nomeReceita);
-	printf("///                  Numero: %d \n", identificador);
-  printf("///                                                                       ///\n");
-	printf("/////////////////////////////////////////////////////////////////////////////\n");
-  getchar();
-	printf("\n");
-  printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
+  fclose(fp);
+  return NULL;
 }
 
-void editReceita(void) {
-  char nome[20];
-  char novonome[20];
-  int identificador;
-    limpaTela();
-	printf("\n");
-	printf("/////////////////////////////////////////////////////////////////////////////\n");
-	printf("///                                                                       ///\n");
-	printf("///          ===================================================          ///\n");
-	printf("///          = = = = = = = = = = = = = = = = = = = = = = = = = =          ///\n");
-	printf("///          = = = =    Caderno Virtual de Receitas      = = = =          ///\n");
-	printf("///          = = = = = = = = = = = = = = = = = = = = = = = = = =          ///\n");
-	printf("///          ===================================================          ///\n");
-	printf("///            Developed by  @CintiaCQ and @Sana-El - Fev, 2021           ///\n");
-	printf("///                                                                       ///\n");
-	printf("/////////////////////////////////////////////////////////////////////////////\n");
-	printf("///                                                                       ///\n");
-	printf("///           = = = = = = = = = = = = = = = = = = = = = = = =             ///\n");
-	printf("///           = = = = = = = =  Editar receita = = = = = = = =             ///\n");
-	printf("///           = = = = = = = = = = = = = = = = = = = = = = = =             ///\n");
-	printf("///                                                                       ///\n");
-	printf("///          Digite o nome da receita que quer alterar: ");
-	scanf("%[A-ZÁÉÍÓÚÂÊÔÇÀÃÕ a-záéíóúâêôçàãõ]", nome);
-	getchar();
-  while (validaNome(nome)==0){
-  printf("Deu erro, tente novamente \n");
-  printf("///          Digite o nome da receita que quer alterar: ");
-	scanf("%[A-ZÁÉÍÓÚÂÊÔÇÀÃÕ a-záéíóúâêôçàãõ]", nome);
-  getchar();
-   }
-
-  printf("///                   adicionar número da  receita: ");
-  scanf("%d", &identificador); 
-  getchar();
-
-  while (validaIdentificador(&identificador) == 0){
-  printf("digite apenas numeros maiores que zero\n");
-  printf("///                   adicionar número da  receita: ");
-  scanf("%d", &identificador);
-  getchar();
-  }
-
-	printf("///          Digite o novo nome: ");
-	scanf("%[A-ZÁÉÍÓÚÂÊÔÇÀÃÕ a-záéíóúâêôçàãõ]", novonome);
-  getchar();
-  
-  while (validaNome(novonome)==0){
-  printf("Deu erro, tente novamente \n");
-  printf("///          Digite o novo nome: ");
-	scanf("%[A-ZÁÉÍÓÚÂÊÔÇÀÃÕ a-záéíóúâêôçàãõ]", novonome);
-  getchar();
-  }
-  printf("///          ====================================================         ///\n");
-  printf("///                                                                       ///\n");
-	printf("///                  Receita editada com sucesso!                         ///\n");
-  printf("///                  Receita: %s \n", novonome);
-	printf("///                                                                       ///\n");
-	printf("///                                                                       ///\n");
-	printf("/////////////////////////////////////////////////////////////////////////////\n");
-	printf("\n");
-  getchar();
-  printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
-}
-void menuEditIngredientes(void){
- char editReceita[21];
- char novaReceita[21];
- int identificador; 
- limpaTela();
-  printf("/////////////////////////////////////////////////////////////////////////////\n");
-	printf("///                                                                       ///\n");
-	printf("///          ===================================================          ///\n");
-	printf("///          = = = = = = = = = = = = = = = = = = = = = = = = = =          ///\n");
-	printf("///          = = = =    Caderno Virtual de Receitas      = = = =          ///\n");
-	printf("///          = = = = = = = = = = = = = = = = = = = = = = = = = =          ///\n");
-	printf("///          ===================================================          ///\n");
-	printf("///            Developed by  @CintiaCQ and @Sana-El - Fev, 2021           ///\n");
-	printf("///                                                                       ///\n");
-	printf("/////////////////////////////////////////////////////////////////////////////\n");
-	printf("///                                                                       ///\n");
-	printf("///           = = = = = = = = = = = = = = = = = = = = = = = =             ///\n");
-	printf("///           = = = = Editar Ingredientes da receita  = = = =             ///\n");
-	printf("///           = = = = = = = = = = = = = = = = = = = = = = = =             ///\n");
-	printf("///                                                                       ///\n");
-	printf("///            informe a receita ");
-  scanf("%[A-ZÁÉÍÓÚÂÊÔÇÀÃÕ a-záéíóúâêôçàãõ],[0-9/]", editReceita);
-  getchar();
-  while (validaNome(editReceita)==0){
-  printf("Digite a primeira letra em maiúsculoo.");
-  printf("///            informe a receita ");
-  scanf("%[A-ZÁÉÍÓÚÂÊÔÇÀÃÕ a-záéíóúâêôçàãõ],[0-9/]", editReceita);
-  getchar();
-  }
-
-  printf("///            informe o numero da receita ");
-  scanf("%d", &identificador);
-  getchar();
-  while (validaIdentificador(&identificador) == 0){
-  printf("digite apenas numeros maiores que zero\n");
-  printf("///                   adicionar número da  receita: ");
-  scanf("%d", &identificador);
-  getchar();
-  }
-
-  	printf("///            informe a nova receita ");
-  scanf("%[A-ZÁÉÍÓÚÂÊÔÇÀÃÕ a-záéíóúâêôçàãõ],[0-9/]", novaReceita);
-  getchar();
-  while (validaNome(novaReceita)==0) {
-  printf("Digite a primeira letra em maiúsculoo.");
-  printf("///            informe a receita ");
-  scanf("%[A-ZÁÉÍÓÚÂÊÔÇÀÃÕ a-záéíóúâêôçàãõ],[0-9/]", novaReceita);
-  getchar();
-  }
-
-  printf("///          ====================================================         ///\n");
-  printf("///                                                                       ///\n");
-	printf("///                  Receita editada com sucesso!                         ///\n");
-  printf("///                  Receita: %s \n", novaReceita);
-	printf("///                                                                       ///\n");
-  printf("///                                                                       ///\n");
-	printf("/////////////////////////////////////////////////////////////////////////////\n"); 
+void listaReceita(void) {
+  FILE* fp;
+  Receita* rct;
+  cls;
   printf("\n");
-	printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
-}
-
-void delReceita(void) {
-  char del [20];
-  int identificador;
-    limpaTela();
-	printf("\n");
 	printf("/////////////////////////////////////////////////////////////////////////////\n");
 	printf("///                                                                       ///\n");
 	printf("///          ===================================================          ///\n");
@@ -248,40 +154,29 @@ void delReceita(void) {
 	printf("/////////////////////////////////////////////////////////////////////////////\n");
 	printf("///                                                                       ///\n");
 	printf("///           = = = = = = = = = = = = = = = = = = = = = = = =             ///\n");
-	printf("///           = = = = = = = = Deletar Receita = = = = = = = =             ///\n");
+	printf("///           = = = = = = = =  Listar Receita = = = = = = = =             ///\n");
 	printf("///           = = = = = = = = = = = = = = = = = = = = = = = =             ///\n");
-	printf("///                                                                       ///\n");
-	printf("///          digite a receita a ser deletada: ");
-  scanf("%[A-ZÁÉÍÓÚÂÊÔÇÀÃÕ a-záéíóúâêôçàãõ]", del);
-  getchar();
-  while (validaNome(del)==0){
-  printf("Deu erro, tente novamente \n");
-  printf("///            informe o numero da receita ");
-  scanf("%d", &identificador);
-  getchar();
+  rct = (Receita*) malloc(sizeof(Receita));
+  fp = fopen("Receita.dat", "rb");
+  if (fp == NULL) {
+    printf("Ops! Ocorreu um erro na abertura do arquivo!\n");
+    printf("Não é possível continuar este programa...\n");
+    exit(1);
   }
-  while (validaIdentificador(&identificador) == 0){
-  printf("digite apenas numeros maiores que zero\n");
-  printf("///                   adicionar número da  receita: ");
-  scanf("%d", &identificador);
-  getchar();
+  while(fread(rct, sizeof(Receita), 1, fp)) {  
+    if (rct->status != 'x') {
+      exibeReceita(rct);
+    }
   }
-  printf("///          ====================================================         ///\n");
-  printf("///                                                                       ///\n");
-	printf("///                 Receita excluida com sucesso!                         ///\n");
-	printf("///                                                                       ///\n");
-  printf("///                                                                       ///\n");
-	printf("///                                                                       ///\n");
-	printf("/////////////////////////////////////////////////////////////////////////////\n");
-	printf("\n");
-  printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
-  getchar();
+  fclose(fp);
 }
 
-void pesquisarReceita(void) {
-  char ingredientes[1000];
-  limpaTela();
-	printf("\n");
+void listaReceitaPorIngrediente(void) {
+  FILE* fp;
+  char chave[51];
+  Receita* rct;
+  cls;
+  printf("\n");
 	printf("/////////////////////////////////////////////////////////////////////////////\n");
 	printf("///                                                                       ///\n");
 	printf("///          ===================================================          ///\n");
@@ -289,24 +184,63 @@ void pesquisarReceita(void) {
 	printf("///          = = = =    Caderno Virtual de Receitas      = = = =          ///\n");
 	printf("///          = = = = = = = = = = = = = = = = = = = = = = = = = =          ///\n");
 	printf("///          ===================================================          ///\n");
-	printf("///           Developed by  @CintiaCQ and @Sana-El - Fev, 2021            ///\n");
+	printf("///            Developed by  @CintiaCQ and @Sana-El - Fev, 2021           ///\n");
 	printf("///                                                                       ///\n");
 	printf("/////////////////////////////////////////////////////////////////////////////\n");
 	printf("///                                                                       ///\n");
 	printf("///           = = = = = = = = = = = = = = = = = = = = = = = =             ///\n");
-	printf("///           = = = Pesquisar Receita por ingreditene = = = =             ///\n");
+	printf("///           = = = = = = = =  Listar Receita = = = = = = = =             ///\n");
+  printf("///           = = = = = = = = Por ingredientes  = = = = = = =             ///\n");
 	printf("///           = = = = = = = = = = = = = = = = = = = = = = = =             ///\n");
-	printf("///                                                                       ///\n");
-	printf("///           ingredientes: ");
-  scanf("%[A-ZÁÉÍÓÚÂÊÔÇÀÃÕ a-záéíóúâêôçàãõ],[0-9/]", ingredientes);
-	getchar();
-  printf("///          ====================================================         ///\n");
   printf("///                                                                       ///\n");
-	printf("///                     Ingrediente não encontrado!                       ///\n");
-	printf("///                                                                       ///\n");
-	printf("///                                                                       ///\n");
-	printf("/////////////////////////////////////////////////////////////////////////////\n");
-	printf("\n");
-	printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
-	getchar();
+  printf("///           = = = = = = = =  Busca Receita  = = = = = = = =             /// \n"); 
+  printf("///                       Informe um ingrediente: "); 
+  scanf(" %50[^\n]", chave);
+  rct = (Receita*) malloc(sizeof(Receita));
+  fp = fopen("Receita.dat", "rb");
+  if (fp == NULL) {
+    printf("Ops! Ocorreu um erro na abertura do arquivo!\n");
+    printf("Não é possível continuar este programa...\n");
+    exit(1);
+  }
+  while(fread(rct, sizeof(Receita), 1, fp)) {
+    if (strcmp(rct->palavrachave, chave) == 0 && (rct->status != 'x')) {
+      exibeReceita(rct);
+    }
+  }
+  fclose(fp);
+}
+
+
+void excluiReceita(Receita* rctLido) {
+  FILE* fp;
+  Receita* rctArq;
+  int codigo;
+  int achou = 0;
+  if (rctLido == NULL) {
+    printf("Ops! A receita informada não existe!\n");
+  }
+  else {
+    rctArq = (Receita*) malloc(sizeof(Receita));
+    fp = fopen("Receita.dat", "r+b");
+    if (fp == NULL) {
+      printf("Ops! Ocorreu um erro na abertura do arquivo!\n");
+      printf("Não é possível continuar este programa...\n");
+      exit(1);
+    }
+    while(!feof(fp)) {
+      fread(rctArq, sizeof(Receita), 1, fp);
+      if ((rctArq->identificador == rctLido->identificador) && (rctArq->status != 'x')) {
+        achou = 1;
+        rctArq->status = 'x';
+        fseek(fp, -1*sizeof(Receita), SEEK_CUR);
+        fwrite(rctArq, sizeof(Receita), 1, fp);
+        printf("\nReceita excluída com sucesso!!!\n");
+      }
+    }
+    if (!achou) {
+      printf("\nReceita não encontrada!\n");
+    }
+    fclose(fp);
+  }
 }
