@@ -3,6 +3,7 @@
 #include <stdlib.h>
 #include "Listas.h"
 #include "moduloReceita.h"
+
 #define cls system("clear||cls");
 
 
@@ -11,34 +12,31 @@ typedef struct receita Receita;
 void moduloReceita(void){
     Receita* pagina;
   int opcao; 
-    opcao = menuPrincipal();
+    opcao = menuReceita();
   while (opcao != 0) {
     switch (opcao) {
       case 1 :  pagina = preencheReceita();
                 gravaReceita(pagina);
-                listas();
+                listas(pagina);
                 break;
       case 2 :  pagina = buscaReceita();
-                exibeReceita(pagina);
-                exibelistas();
-                
+                exibeReceita(pagina);              
                 break;
       case 3 :  pagina = buscaReceita();
                 excluiReceita(pagina);
                 break;
       case 4 :  listaReceita();
-                exibelistas();
                 break;
       case 5 :  listaReceitaPorIngrediente();
                 break;
     }
-    opcao = menuPrincipal();
+    opcao = menuReceita();
   }
   free(pagina);
 }
 
 
-int menuPrincipal(void) {
+int menuReceita(void) {
   int op;
 	printf("\n");
 	printf("/////////////////////////////////////////////////////////////////////////////\n");
@@ -243,4 +241,54 @@ void excluiReceita(Receita* rctLido) {
     }
     fclose(fp);
   }
+}
+
+void exibeReceita(Receita* rc) {
+  char situacao[20];
+  char opcao='n';
+  if ((rc == NULL) || (rc->status == 'x')) {
+    printf("\n= = = Receita Inexistente = = =\n");
+  } else {
+    printf("\n= = = Receita Cadastrada = = =\n");
+    printf("identificador: %ld\n",rc->identificador);
+    printf("Nome da receita: %s\n",rc->receita);                    
+    getchar();
+    printf("deseja visualizar receita?: ");
+    scanf("%c",&opcao);
+    printf("%c -----------------------------------------\n",opcao);
+    if(opcao=='s'){
+      visualizaReceita(rc);
+      printf("passou aqui 2\n");
+    }
+    else if (rc->status == 'V') {
+      strcpy(situacao, "Existente");
+    }else if (rc->status == 'N') {
+      strcpy(situacao, "Não existente");
+    } else {
+      strcpy(situacao, "Não informado");
+    }
+    printf("Situação da Receita: %s", situacao);
+  }
+}
+
+void visualizaReceita(Receita* rc){
+  FILE *fp;
+  char *nomeArquivo;
+  int tam;
+  char linha[250];
+
+  tam = strlen(rc->receita) + 5;
+  nomeArquivo = (char*) malloc(tam*sizeof(char));
+  strcpy(nomeArquivo, rc->receita);
+  strcat(nomeArquivo, ".txt");
+  fp = fopen(nomeArquivo,"rt");
+  if (fp == NULL){
+    printf("Erro na abertura do arquivo\n!");
+    exit(1);
+  }
+  printf("\nLendo dados no arquivo...\n\n");
+  while(fgets(linha,250,fp)!=NULL){
+    printf("%s",linha);
+  }
+  fclose(fp);
 }
