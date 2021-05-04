@@ -1,11 +1,19 @@
 
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 #include "validacao.h"
+#include "Listas.h"
+#include "moduloReceita.h"
+
+#define cls system("clear||cls");
+
+typedef struct receita Receita;
+
 
 char menuRelatorio(void) { 
-  char op; 
-    limpaTela();
+  char op;
+  cls;
 	printf("\n");
 	printf("/////////////////////////////////////////////////////////////////////////////\n");
 	printf("///                                                                       ///\n");
@@ -23,28 +31,26 @@ char menuRelatorio(void) {
 	printf("///           = = = = = = = = = = = = = = = = = = = = = = = =             ///\n");
 	printf("///                                                                       ///\n");
 	printf("///           1. Relatório de Receitas                                    ///\n");
-	printf("///           2. Relatório de Ingredientes                                ///\n");
-	printf("///           3. Relatório de Procedimento                                ///\n");
+  printf("///           2. Listar receitas por tags                                 ///\n");
+  printf("///           3. Pesquisar Receita por identificador                      ///\n");
   printf("///           0. sair                                                     ///\n");
 	printf("///                                                                       ///\n");
-	printf("///           Escolha a opção desejada: \n");
-	printf("///                                                                       ///\n");
-	printf("/////////////////////////////////////////////////////////////////////////////\n");
-    scanf("%c", &op);
+	printf("///           Escolha a opção desejada: ");
+  scanf("%c", &op);
 	getchar();
+  printf("///                                                                       ///\n");
+  printf("/////////////////////////////////////////////////////////////////////////////\n");
 	printf("\n");
-    printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
+  printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
 	getchar();
   return op;
 }
 
-void relatorioreceita(void) {
-    char receita1[14] = "Ovo Frito";
-    char receita2[14] = "Ovo Cozido";
-    char receita3[14] = "Ovo mexido";
-    int total = 3;
-    limpaTela();
-	printf("\n");
+void listaReceita(void) {
+FILE* fp;
+  Receita* rct;
+  cls;
+  printf("\n");
 	printf("/////////////////////////////////////////////////////////////////////////////\n");
 	printf("///                                                                       ///\n");
 	printf("///          ===================================================          ///\n");
@@ -52,98 +58,84 @@ void relatorioreceita(void) {
 	printf("///          = = = =    Caderno Virtual de Receitas      = = = =          ///\n");
 	printf("///          = = = = = = = = = = = = = = = = = = = = = = = = = =          ///\n");
 	printf("///          ===================================================          ///\n");
-	printf("///            Developed by  @Cintiacq and @Sana-El - Jan, 2021           ///\n");
+	printf("///            Developed by  @CintiaCQ and @Sana-El - Fev, 2021           ///\n");
 	printf("///                                                                       ///\n");
 	printf("/////////////////////////////////////////////////////////////////////////////\n");
-  printf("///           = = = = = = = = = = = = = = = = = = = = = = = =             ///\n");
-	printf("///           = = = = =    Relatório de Receitas    = = = = =             ///\n");
-	printf("///           = = = = = = = = = = = = = = = = = = = = = = = =             ///\n");
-  printf("///           Todos as Receitas:                                          ///\n");
 	printf("///                                                                       ///\n");
-  printf("///           ===============================================             ///\n");
-    
-    for(int i=0; i < 2; i++){
-        printf("///             Receita 1: %s\n", receita1);
-        printf("///             Receita 2: %s\n", receita2);
-        printf("///             Receita 3: %s\n", receita3);
-        printf("///                 Total: %d\n", total);
-        printf("///           ==============================================              ///\n");
-    }
-    printf("\n/////////////////////////////////////////////////////////////////////////\n");
-    printf("\n\t\t>>> Tecle <ENTER> para continuar...\n");
-    getchar();
-
-
-}
-void relatorioingredientes(void) {
-    char ingredientes1[20] = "ovo, sal e azeite";
-    char ingredientes2[4] = "ovo";
-    char ingredientes3[20] = "ovo, sal e azeite";
-    limpaTela();
-	printf("\n");
-	printf("/////////////////////////////////////////////////////////////////////////////\n");
-	printf("///                                                                       ///\n");
-	printf("///          ===================================================          ///\n");
-	printf("///          = = = = = = = = = = = = = = = = = = = = = = = = = =          ///\n");
-	printf("///          = = = =    Caderno Virtual de Receitas      = = = =          ///\n");
-	printf("///          = = = = = = = = = = = = = = = = = = = = = = = = = =          ///\n");
-	printf("///          ===================================================          ///\n");
-	printf("///            Developed by  @Cintiacq and @Sana-El - Jan, 2021           ///\n");
-	printf("///                                                                       ///\n");
-	printf("/////////////////////////////////////////////////////////////////////////////\n");
-	printf("///                        (EM DESENVOLVIMENTO)                           ///\n");
 	printf("///           = = = = = = = = = = = = = = = = = = = = = = = =             ///\n");
-	printf("///           = = = = =  Relatório de Ingredientes  = = = = =             ///\n");
+	printf("///           = = = = = = = =  Listar Receita = = = = = = = =             ///\n");
 	printf("///           = = = = = = = = = = = = = = = = = = = = = = = =             ///\n");
-  printf("///           Todos os ingredientes:                                      ///\n");
-  printf("///           ===============================================             ///\n");
-    for(int i=0; i < 3; i++){
-    printf("///             Ingredientes: %s\n", ingredientes1);
-    printf("///             Ingredientes: %s\n", ingredientes2);
-    printf("///             Ingredientes: %s\n", ingredientes3);
-    printf("///           ==============================================              ///\n");
-    printf("\n");
-    }
-    printf("\n/////////////////////////////////////////////////////////////////////////\n");
-    printf("\n\t\t>>> Tecle <ENTER> para continuar...\n");
-    getchar();
-}
-
-void relatorioprocedimento(void) {
-    limpaTela();
-    char procedimento1[1000] = "Coloque um fio de azeite na frigideira.\nIsso ajuda o ovo a não grudar. Deixe aquecer.\nQuebre o ovo na figideira.\nSalpique uma pitada de sal por todo o ovo.\n Mantenha em fogo baixo até a clara estar\nrendada e a gema, mole.";
-    char procedimento2[1000] = "Coloque o ovo numa vasilha de metal, em seguida preencha-a com agua até cobrir os ovos.\nQuando começar a ferver espere por cerca de 10 minutos e\nlogo após leve-os para a pia e quebre-os embaixo da terneira em água corrente.";
-    char procedimento3[1000] = "Coloque um fio de azeite na frigideira. Isso ajuda o ovo a não grudar.\nDeixe aquecer. Quebre o ovo na figideira.\nSalpique uma pitada de sal por todo o ovo e deixe\ncozinhar mexendo sempre. ";
-	printf("\n");
-	printf("/////////////////////////////////////////////////////////////////////////////\n");
-	printf("///                                                                       ///\n");
-	printf("///          ===================================================          ///\n");
-	printf("///          = = = = = = = = = = = = = = = = = = = = = = = = = =          ///\n");
-	printf("///          = = = =    Caderno Virtual de Receitas      = = = =          ///\n");
-	printf("///          = = = = = = = = = = = = = = = = = = = = = = = = = =          ///\n");
-	printf("///          ===================================================          ///\n");
-	printf("///            Developed by  @Cintiacq and @Sana-El - Jan, 2021           ///\n");
-	printf("///                                                                       ///\n");
-	printf("/////////////////////////////////////////////////////////////////////////////\n");
-
-	printf("///           = = = = = = = = = = = = = = = = = = = = = = = =             ///\n");
-	printf("///           = = = = = Relatório de Procedimentos  = = = = =             ///\n");
-	printf("///           = = = = = = = = = = = = = = = = = = = = = = = =             ///\n");
-  printf("///           Todos os procedimentos:                                     ///\n");
-  printf("///           ===============================================             ///\n");
-    
-    for(int i=0; i < 3; i++){
-    printf("///Procedimento 1:\n %s\n", procedimento1);
-    printf("\n");
-    printf("///Procedimento 2:\n %s\n", procedimento2);
-    printf("\n");
-    printf("///Procedimento 3:\n %s\n", procedimento3);
-    printf("\n");
-    printf("///           ==============================================              ///\n");
-    }
-    printf("///                                                                       ///\n");
-    printf("/////////////////////////////////////////////////////////////////////////////\n");
-    printf("\n");
-    printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
-    getchar();
+  rct = (Receita*) malloc(sizeof(Receita));
+  fp = fopen("Receita.dat", "rb");
+  if (fp == NULL) {
+    printf("Ops! Ocorreu um erro na abertura do arquivo!\n");
+    printf("Não é possível continuar este programa...\n");
+    exit(1);
   }
+  while(fread(rct, sizeof(Receita), 1, fp)) {  
+      exibeReceita(rct);
+  }
+  printf("///                                                                       ///\n");
+  printf("/////////////////////////////////////////////////////////////////////////////\n");
+  fclose(fp);
+  printf("Tecle ENTER para continuar!");
+  getchar();
+}
+
+void pesquisarReceitaporTag() {
+  FILE* fp;
+  char chave[51];
+  Receita* rct;
+  cls;
+  printf("\n");
+	printf("/////////////////////////////////////////////////////////////////////////////\n");
+	printf("///                                                                       ///\n");
+	printf("///          ===================================================          ///\n");
+	printf("///          = = = = = = = = = = = = = = = = = = = = = = = = = =          ///\n");
+	printf("///          = = = =    Caderno Virtual de Receitas      = = = =          ///\n");
+	printf("///          = = = = = = = = = = = = = = = = = = = = = = = = = =          ///\n");
+	printf("///          ===================================================          ///\n");
+	printf("///            Developed by  @CintiaCQ and @Sana-El - Fev, 2021           ///\n");
+	printf("///                                                                       ///\n");
+	printf("/////////////////////////////////////////////////////////////////////////////\n");
+	printf("///                                                                       ///\n");
+	printf("///           = = = = = = = = = = = = = = = = = = = = = = = =             ///\n");
+	printf("///           = = = = = = = =  Listar Receita = = = = = = = =             ///\n");
+  printf("///           = = = = = = = =     Por Tags      = = = = = = =             ///\n");
+	printf("///           = = = = = = = = = = = = = = = = = = = = = = = =             ///\n");
+  printf("///                                                                       ///\n");
+  printf("///  Dica: Tag pode ser um ingrediente, tempo de preparo ou dificuldade!  ///\n");
+  printf("///                                                                       ///\n");
+  printf("///           = = = = = = = =  Busca Receita  = = = = = = = =             /// \n"); 
+  printf("///                       Informe uma tag: "); 
+  scanf(" %50[^\n]", chave);
+  rct = (Receita*) malloc(sizeof(Receita));
+  fp = fopen("Receita.dat", "rb");
+  if (fp == NULL) {
+    printf("Ops! Ocorreu um erro na abertura do arquivo!\n");
+    printf("Não é possível continuar este programa...\n");
+    exit(1);
+  }
+  while(fread(rct, sizeof(Receita), 1, fp)) {
+    if (strcmp(rct->tag1, chave) == 0 && (rct->status != 'x')) {
+      exibeReceita(rct);
+    } else if (strcmp(rct->tag2, chave) == 0 && (rct->status != 'x')) {
+      exibeReceita(rct);
+    }else if (strcmp(rct->tag3, chave) == 0 && (rct->status != 'x')) {
+      exibeReceita(rct);
+    }else if (strcmp(rct->tag4, chave) == 0 && (rct->status != 'x')) {
+      exibeReceita(rct);
+    }else if (strcmp(rct->tag5, chave) == 0 && (rct->status != 'x')) {
+      exibeReceita(rct);
+    } else {
+      printf("\nNão encontrado\n");
+    }
+  }
+  fclose(fp);
+  getchar();
+  printf("///                                                                       ///\n");
+  printf("/////////////////////////////////////////////////////////////////////////////\n");
+	printf("\n");
+    printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
+	getchar();
+}
