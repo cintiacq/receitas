@@ -10,15 +10,15 @@
 ///////////////////////////////////////////////////////////////////////////////
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 #include "modulosobre.h"
 #include "moduloInicial.h"
 #include "moduloReceita.h"
 #include "moduloRelatorio.h"
-#include "validação.h"
+#include "validacao.h"
 #include "Listas.h"
 
 #define cls system("clear||cls");
-
 
 int main(void) { 
   int op;
@@ -37,23 +37,20 @@ int main(void) {
   return 0;
 }
 
-
- 
  
 void moduloRelatorio(void){
-  	char op;
+  Receita* pagina;
+  	int op;
 	do {
 		op = menuRelatorio();
 		switch(op) {
-			case '1': 	relatorioreceita();
+			case '1': listaReceita();
 						break;
-			case '2': 	relatorioingredientes();
+      case '2': pesquisarReceitaporTag();
 						break;
-			case '3': 	relatorioprocedimento();
-						break;
+      case '3': pagina = buscaReceita();
+              exibeReceita(pagina);      
+
 		} 		
 	} while (op != '0');
 }
-
-
-

@@ -2,9 +2,11 @@
 #include <stdlib.h>
 #include "validacao.h"
 
+#define cls system("clear||cls");
+
 int menuPrincipal(void) { 
   char op; 
-    limpaTela();
+    cls;
 	printf("\n");
 	printf("/////////////////////////////////////////////////////////////////////////////\n");
 	printf("///                                                                       ///\n");
@@ -22,19 +24,21 @@ int menuPrincipal(void) {
 	printf("///           = = = = = = = = = = = = = = = = = = = = = = = =             ///\n");
 	printf("///                                                                       ///\n");
 	printf("///           1. Modulo receita                                           ///\n");
-	printf("///           2. Modulo ingrediente                                       ///\n");
-	printf("///           3. Modulo procedimento                                      ///\n");
-        printf("///           4. Modulo relatório                                         ///\n");
-        printf("///           5. Modulo informações                                       ///\n");  
+        printf("///           2. Modulo relatório                                         ///\n");
+        printf("///           3. Modulo informações                                       ///\n");  
         printf("///           0. Encerra o programa                                       ///\n");
 	printf("///                                                                       ///\n");
-	printf("///           Escolha a opção desejada: \n");
 	printf("///                                                                       ///\n");
-	printf("/////////////////////////////////////////////////////////////////////////////\n");
-  scanf("%c", &op);
-  getchar();
-	printf("\n");
-  printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
-	getchar();
-  return op;
-}
+	printf("///           Escolha a opção desejada: ");
+        scanf("%c", &op);
+        getchar();
+        printf("///                                                                       ///\n");
+        printf("/////////////////////////////////////////////////////////////////////////////\n");
+        printf("\nTecle ENTER para continuar\n");                 
+        getchar();
+        return op;
+       }
+
+
+
+

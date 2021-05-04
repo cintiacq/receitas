@@ -1,0 +1,2 @@
+char listas();
+char exibelistas();

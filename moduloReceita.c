@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
+#include <time.h>   
 #include "Listas.h"
 #include "moduloReceita.h"
 
@@ -10,34 +11,28 @@
 typedef struct receita Receita;
 
 void moduloReceita(void){
-    Receita* pagina;
-  int opcao; 
+  Receita* pagina;
+  pagina = NULL;
+  char opcao; 
+  do {
     opcao = menuReceita();
-  while (opcao != 0) {
     switch (opcao) {
-      case 1 :  pagina = preencheReceita();
+      case '1' :  pagina = preencheReceita();
                 gravaReceita(pagina);
                 listas(pagina);
                 break;
-      case 2 :  pagina = buscaReceita();
-                exibeReceita(pagina);              
-                break;
-      case 3 :  pagina = buscaReceita();
+      case '2' :  pagina = buscaReceita();
                 excluiReceita(pagina);
                 break;
-      case 4 :  listaReceita();
-                break;
-      case 5 :  listaReceitaPorIngrediente();
-                break;
     }
-    opcao = menuReceita();
-  }
+  }  while (opcao != '0');
   free(pagina);
 }
 
 
-int menuReceita(void) {
-  int op;
+char menuReceita(void) {
+  char op;
+  cls;
 	printf("\n");
 	printf("/////////////////////////////////////////////////////////////////////////////\n");
 	printf("///                                                                       ///\n");
@@ -56,13 +51,16 @@ int menuReceita(void) {
 	printf("///                                                                       ///\n");
   printf("///           0. Encerra o programa                                       ///\n");	
   printf("///           1. Cadastrar Receita                                        ///\n");
-	printf("///           2. Pesquisar Receita                                        ///\n");
-	printf("///           3. Deletar receita                                          ///\n");
-  printf("///           4. Listar Receitas                                          ///\n");
-	printf("///           5. listar receitas por ingrediente                          ///\n");
+	printf("///           2. Deletar receita                                          ///\n");
 	printf("///                                                                       ///\n");
 	printf("///           Escolha a opção desejada: ");
-  scanf("%d", &op);
+  scanf("%c", &op);
+	getchar();
+  printf("///                                                                       ///\n");
+  printf("/////////////////////////////////////////////////////////////////////////////\n");
+	printf("\n");
+  printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
+	getchar();
   return op;
 }
 
@@ -71,13 +69,25 @@ Receita* preencheReceita(void) {
   rct = (Receita*) malloc(sizeof(Receita));
   printf("\nInforme o código da receita em números: ");
   scanf("%ld", &rct->identificador);
-  printf("///           Informe o nome da receita: ");
+  printf("///      Informe o nome da receita: ");
   scanf(" %80[^\n]", rct->receita);
-  printf("///           Informe as palavras chave: ");
-  scanf(" %50[^\n]", rct->palavrachave);
-
- 
-   rct->status = 'V';
+  printf("\nDica:Pode ser o primeiro ingrediente principal\n");
+  printf("///      Informe a 1ª palavra chave: ");
+  scanf(" %50[^\n]", rct->tag1);
+  printf("Dica:Pode ser o segundo ingrediente principal\n");
+  printf("///      Informe a 2ª palavra chave: ");
+  scanf(" %50[^\n]", rct->tag2);
+  printf("Dica:Pode ser o terceiro ingrediente principal\n");
+  printf("///      Informe a 3ª palavra chave: ");
+  scanf(" %50[^\n]", rct->tag3);
+  printf("Dica:Pode ser o tempo de preparo: Rápido, Médio ou demorado\n");
+  printf("///      Informe a 4ª palavra chave: ");
+  scanf(" %50[^\n]", rct->tag4);
+  printf("Dica:Pode ser o nível de dificuldade:Fácil, Médio ou Difícil\n");
+  printf("///      Informe a 5ª palavra chave: ");
+  scanf(" %50[^\n]", rct->tag5);
+  getchar();
+  rct->status = 'V';
   return rct;
 }
 
@@ -87,6 +97,7 @@ void gravaReceita(Receita* rct) {
   if (fp == NULL) {
     printf("Ops! Ocorreu um erro na abertura do arquivo!\n");
     printf("Não é possível continuar este programa...\n");
+    getchar();  
     exit(1);
   }
   fwrite(rct, sizeof(Receita), 1, fp);
@@ -96,7 +107,7 @@ void gravaReceita(Receita* rct) {
 Receita* buscaReceita(void) {
   FILE* fp;
   Receita* rct;
-  int codigo;
+  long int codigo;
   cls;
   printf("\n");
  	printf("/////////////////////////////////////////////////////////////////////////////\n");
@@ -112,13 +123,17 @@ Receita* buscaReceita(void) {
 	printf("///                                                                       ///\n");
 	printf("///           = = = = = = = = = = = = = = = = = = = = = = = =             ///\n");
 	printf("///           = = = = = = = =  Buscar Receita = = = = = = = =             ///\n");
+	printf("///           = = = =    Por Indentificador(Números)  = = = =             ///\n");
 	printf("///           = = = = = = = = = = = = = = = = = = = = = = = =             ///\n");
   printf("///                      Informe o identificador: "); 
-  scanf("%d", &codigo);
+  scanf("%ld", &codigo);
+  getchar();
   rct = (Receita*) malloc(sizeof(Receita));
   fp = fopen("Receita.dat", "rb");
   printf("///                                                                       ///\n");
 	printf("/////////////////////////////////////////////////////////////////////////////\n");
+  printf("\nTecle ENTER para continuar\n");                 
+  getchar();
   if (fp == NULL) {
     printf("Ops! Ocorreu um erro na abertura do arquivo!\n");
     printf("Não é possível continuar este programa...\n");
@@ -135,80 +150,6 @@ Receita* buscaReceita(void) {
   return NULL;
 }
 
-void listaReceita(void) {
-  FILE* fp;
-  Receita* rct;
-  cls;
-  printf("\n");
-	printf("/////////////////////////////////////////////////////////////////////////////\n");
-	printf("///                                                                       ///\n");
-	printf("///          ===================================================          ///\n");
-	printf("///          = = = = = = = = = = = = = = = = = = = = = = = = = =          ///\n");
-	printf("///          = = = =    Caderno Virtual de Receitas      = = = =          ///\n");
-	printf("///          = = = = = = = = = = = = = = = = = = = = = = = = = =          ///\n");
-	printf("///          ===================================================          ///\n");
-	printf("///            Developed by  @CintiaCQ and @Sana-El - Fev, 2021           ///\n");
-	printf("///                                                                       ///\n");
-	printf("/////////////////////////////////////////////////////////////////////////////\n");
-	printf("///                                                                       ///\n");
-	printf("///           = = = = = = = = = = = = = = = = = = = = = = = =             ///\n");
-	printf("///           = = = = = = = =  Listar Receita = = = = = = = =             ///\n");
-	printf("///           = = = = = = = = = = = = = = = = = = = = = = = =             ///\n");
-  rct = (Receita*) malloc(sizeof(Receita));
-  fp = fopen("Receita.dat", "rb");
-  if (fp == NULL) {
-    printf("Ops! Ocorreu um erro na abertura do arquivo!\n");
-    printf("Não é possível continuar este programa...\n");
-    exit(1);
-  }
-  while(fread(rct, sizeof(Receita), 1, fp)) {  
-    if (rct->status != 'x') {
-      exibeReceita(rct);
-    }
-  }
-  fclose(fp);
-}
-
-void listaReceitaPorIngrediente(void) {
-  FILE* fp;
-  char chave[51];
-  Receita* rct;
-  cls;
-  printf("\n");
-	printf("/////////////////////////////////////////////////////////////////////////////\n");
-	printf("///                                                                       ///\n");
-	printf("///          ===================================================          ///\n");
-	printf("///          = = = = = = = = = = = = = = = = = = = = = = = = = =          ///\n");
-	printf("///          = = = =    Caderno Virtual de Receitas      = = = =          ///\n");
-	printf("///          = = = = = = = = = = = = = = = = = = = = = = = = = =          ///\n");
-	printf("///          ===================================================          ///\n");
-	printf("///            Developed by  @CintiaCQ and @Sana-El - Fev, 2021           ///\n");
-	printf("///                                                                       ///\n");
-	printf("/////////////////////////////////////////////////////////////////////////////\n");
-	printf("///                                                                       ///\n");
-	printf("///           = = = = = = = = = = = = = = = = = = = = = = = =             ///\n");
-	printf("///           = = = = = = = =  Listar Receita = = = = = = = =             ///\n");
-  printf("///           = = = = = = = = Por ingredientes  = = = = = = =             ///\n");
-	printf("///           = = = = = = = = = = = = = = = = = = = = = = = =             ///\n");
-  printf("///                                                                       ///\n");
-  printf("///           = = = = = = = =  Busca Receita  = = = = = = = =             /// \n"); 
-  printf("///                       Informe um ingrediente: "); 
-  scanf(" %50[^\n]", chave);
-  rct = (Receita*) malloc(sizeof(Receita));
-  fp = fopen("Receita.dat", "rb");
-  if (fp == NULL) {
-    printf("Ops! Ocorreu um erro na abertura do arquivo!\n");
-    printf("Não é possível continuar este programa...\n");
-    exit(1);
-  }
-  while(fread(rct, sizeof(Receita), 1, fp)) {
-    if (strcmp(rct->palavrachave, chave) == 0 && (rct->status != 'x')) {
-      exibeReceita(rct);
-    }
-  }
-  fclose(fp);
-}
-
 
 void excluiReceita(Receita* rctLido) {
   FILE* fp;
@@ -217,6 +158,7 @@ void excluiReceita(Receita* rctLido) {
   int achou = 0;
   if (rctLido == NULL) {
     printf("Ops! A receita informada não existe!\n");
+    getchar();  
   }
   else {
     rctArq = (Receita*) malloc(sizeof(Receita));
@@ -224,6 +166,7 @@ void excluiReceita(Receita* rctLido) {
     if (fp == NULL) {
       printf("Ops! Ocorreu um erro na abertura do arquivo!\n");
       printf("Não é possível continuar este programa...\n");
+      getchar();
       exit(1);
     }
     while(!feof(fp)) {
@@ -234,10 +177,14 @@ void excluiReceita(Receita* rctLido) {
         fseek(fp, -1*sizeof(Receita), SEEK_CUR);
         fwrite(rctArq, sizeof(Receita), 1, fp);
         printf("\nReceita excluída com sucesso!!!\n");
+        printf("\nTecle ENTER para continuar\n");                 
+        getchar();
       }
     }
     if (!achou) {
       printf("\nReceita não encontrada!\n");
+      printf("\nTecle ENTER para continuar\n");                 
+      getchar();
     }
     fclose(fp);
   }
@@ -246,28 +193,27 @@ void excluiReceita(Receita* rctLido) {
 void exibeReceita(Receita* rc) {
   char situacao[20];
   char opcao='n';
-  if ((rc == NULL) || (rc->status == 'x')) {
+  if (rc == NULL) {
     printf("\n= = = Receita Inexistente = = =\n");
-  } else {
+    printf("\nTecle ENTER para continuar\n");    
+    getchar();
+  } else if(rc->status != 'x') {
     printf("\n= = = Receita Cadastrada = = =\n");
     printf("identificador: %ld\n",rc->identificador);
-    printf("Nome da receita: %s\n",rc->receita);                    
-    getchar();
-    printf("deseja visualizar receita?: ");
+    printf("Nome da receita: %s\n",rc->receita);   
+    printf("deseja visualizar receita?(s/n): ");
     scanf("%c",&opcao);
-    printf("%c -----------------------------------------\n",opcao);
+    printf("\n");
+    getchar();
     if(opcao=='s'){
-      visualizaReceita(rc);
-      printf("passou aqui 2\n");
-    }
-    else if (rc->status == 'V') {
+    visualizaReceita(rc);
+    }else if (rc->status == 'V') {
       strcpy(situacao, "Existente");
     }else if (rc->status == 'N') {
       strcpy(situacao, "Não existente");
     } else {
       strcpy(situacao, "Não informado");
     }
-    printf("Situação da Receita: %s", situacao);
   }
 }
 
