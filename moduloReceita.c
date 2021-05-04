@@ -203,10 +203,9 @@ void exibeReceita(Receita* rc) {
     printf("Nome da receita: %s\n",rc->receita);   
     printf("deseja visualizar receita?(s/n): ");
     scanf("%c",&opcao);
-    printf("\n");
     getchar();
     if(opcao=='s'){
-    visualizaReceita(rc);
+      visualizaReceita(rc);
     }else if (rc->status == 'V') {
       strcpy(situacao, "Existente");
     }else if (rc->status == 'N') {
@@ -214,6 +213,8 @@ void exibeReceita(Receita* rc) {
     } else {
       strcpy(situacao, "Não informado");
     }
+    printf("\nTecle ENTER para continuar\n");
+    getchar();
   }
 }
 
