@@ -109,6 +109,7 @@ void pesquisarReceitaporTag() {
   printf("///           = = = = = = = =  Busca Receita  = = = = = = = =             /// \n"); 
   printf("///                       Informe uma tag: "); 
   scanf(" %50[^\n]", chave);
+  getchar();
   rct = (Receita*) malloc(sizeof(Receita));
   fp = fopen("Receita.dat", "rb");
   if (fp == NULL) {
@@ -132,10 +133,9 @@ void pesquisarReceitaporTag() {
     }
   }
   fclose(fp);
-  getchar();
   printf("///                                                                       ///\n");
   printf("/////////////////////////////////////////////////////////////////////////////\n");
 	printf("\n");
-    printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
+  printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
 	getchar();
 }
