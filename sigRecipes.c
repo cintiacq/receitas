@@ -21,7 +21,7 @@
 #define cls system("clear||cls");
 
 int main(void) { 
-  int op;
+  char op;
   do {
     op = menuPrincipal();
     switch (op) {
@@ -32,22 +32,22 @@ int main(void) {
       case '3':   menuSobre();
                 break;           
     }
-  } while (op != 0);
-  printf("The End\n");
+  } while (op != '0');
+  printf("Você chegou ao fim do nosso programa!\n");
   return 0;
 }
 
  
 void moduloRelatorio(void){
   Receita* pagina;
-  	int op;
+  	char op;
 	do {
 		op = menuRelatorio();
 		switch(op) {
-			case '1': listaReceita();
-						break;
+      case '1': listaReceita();
+			break;
       case '2': pesquisarReceitaporTag();
-						break;
+			break;
       case '3': pagina = buscaReceita();
               exibeReceita(pagina);      
 
