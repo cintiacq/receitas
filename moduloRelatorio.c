@@ -75,8 +75,7 @@ FILE* fp;
   while(fread(rct, sizeof(Receita), 1, fp)) {  
       exibeReceita(rct);
   }
-  printf("///                                                                       ///\n");
-  printf("/////////////////////////////////////////////////////////////////////////////\n");
+  printf("////////////////////////////////////////////////////////////////////////////\n");
   fclose(fp);
   printf("Tecle ENTER para continuar!");
   getchar();
@@ -85,6 +84,7 @@ FILE* fp;
 void pesquisarReceitaporTag() {
   FILE* fp;
   char chave[51];
+  int achou[5]={0};
   Receita* rct;
   cls;
   printf("\n");
@@ -120,17 +120,25 @@ void pesquisarReceitaporTag() {
   while(fread(rct, sizeof(Receita), 1, fp)) {
     if (strcmp(rct->tag1, chave) == 0 && (rct->status != 'x')) {
       exibeReceita(rct);
+      achou[0]=1;
     } else if (strcmp(rct->tag2, chave) == 0 && (rct->status != 'x')) {
       exibeReceita(rct);
+      achou[1]=1;
     }else if (strcmp(rct->tag3, chave) == 0 && (rct->status != 'x')) {
       exibeReceita(rct);
+      achou[2]=1;
     }else if (strcmp(rct->tag4, chave) == 0 && (rct->status != 'x')) {
       exibeReceita(rct);
+      achou[3]=1;
     }else if (strcmp(rct->tag5, chave) == 0 && (rct->status != 'x')) {
       exibeReceita(rct);
-    } else {
-      printf("\nNão encontrado\n");
+      achou[4]=1;
     }
+  }
+  //comparar as posições da variável 'achou' e se todas tiveram tiverem 0 mostra "não encontado"
+  if(achou[0] == 0 && achou[1] == 0 && achou[2] == 0 && achou[3] == 0 && achou[4] == 0){
+ 	printf("///                                                                       ///\n");   
+  printf("///                       Não encontrado !!!                              ///\n");
   }
   fclose(fp);
   printf("///                                                                       ///\n");
@@ -139,3 +147,8 @@ void pesquisarReceitaporTag() {
   printf("\t\t\t>>> Tecle <ENTER> para continuar...\n");
 	getchar();
 }
+
+
+
+  
+  
