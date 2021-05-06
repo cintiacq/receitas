@@ -1,4 +1,3 @@
-
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -79,20 +78,6 @@ void gravaProcedimento(char* nomeReceita, char** lista, int quant) {
   }
   fclose(fp);
 }
-
-
-char exibelistas(){
-  printf("\n= = = Ingredientes = = =\n");
-  for (int i = 0; i < quantidade; i++) {
-  printf("%d. %s", i+1, ingredientes[i]);
-  }
-  printf("\n= = = Passo a passo = = =\n");
-  for (int i = 0; i < quantidadePro; i++) {
-  printf("%d. %s\n", i+1, procedimento[i]);
-  }
-  return 0;
-};
-
 
 static char* input(char *msg) { // pegar mensagens recebidas 
   char linha[256];              
